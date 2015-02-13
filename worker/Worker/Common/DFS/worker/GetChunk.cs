@@ -1,4 +1,5 @@
 using ServiceStack;
+using Common;
 
 namespace Worker
 {

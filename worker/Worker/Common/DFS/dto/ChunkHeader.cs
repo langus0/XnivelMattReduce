@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-namespace Worker
+namespace Common
 {
 	public class ChunkHeader
 	{

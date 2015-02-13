@@ -7,17 +7,17 @@ namespace Worker
 	{
 		public object Any (Ls request)
 		{
-			return new LsResponse { Result = DfsUtils.listWorkingDirectory() };
+			return new LsResponse { Result = DfsWorkerUtils.listWorkingDirectory() };
 		}
 
 		public object Get (GetChunk request)
 		{
-			return new GetChunkResponse { Result= DfsUtils.readChunk(request.FileName,request.chunkId) };
+			return new GetChunkResponse { Result= DfsWorkerUtils.readChunk(request.FileName,request.chunkId) };
 		}
 
 		public object Put (SaveChunk request)
 		{
-			DfsUtils.writeChunk (request.FileName, request.chunkId, request.data);
+			DfsWorkerUtils.writeChunk (request.FileName, request.chunkId, request.data);
 			return new SaveChunkResponse ();
 		}
 	}

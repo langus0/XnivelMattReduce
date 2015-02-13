@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ServiceStack;
+using Common;
 
 namespace Worker
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Worker
+namespace Common
 {
 	public class Chunk
 	{
