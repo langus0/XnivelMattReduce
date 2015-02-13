@@ -3,18 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker", "Worker\Worker.csproj", "{30BAB100-EE03-49CD-AEB8-E05FCFAE8E57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Master", "Master\Master.csproj", "{0F6C4E78-383F-482C-BC43-883776ED48DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{9E31C03B-47CC-486F-BE6B-533982B8311A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F6C4E78-383F-482C-BC43-883776ED48DB}.Debug|x86.ActiveCfg = Debug|x86
+		{0F6C4E78-383F-482C-BC43-883776ED48DB}.Debug|x86.Build.0 = Debug|x86
+		{0F6C4E78-383F-482C-BC43-883776ED48DB}.Release|x86.ActiveCfg = Release|x86
+		{0F6C4E78-383F-482C-BC43-883776ED48DB}.Release|x86.Build.0 = Release|x86
 		{30BAB100-EE03-49CD-AEB8-E05FCFAE8E57}.Debug|x86.ActiveCfg = Debug|x86
 		{30BAB100-EE03-49CD-AEB8-E05FCFAE8E57}.Debug|x86.Build.0 = Debug|x86
 		{30BAB100-EE03-49CD-AEB8-E05FCFAE8E57}.Release|x86.ActiveCfg = Release|x86
 		{30BAB100-EE03-49CD-AEB8-E05FCFAE8E57}.Release|x86.Build.0 = Release|x86
+		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Debug|x86.Build.0 = Debug|Any CPU
+		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Release|x86.ActiveCfg = Release|Any CPU
+		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Worker\Worker.csproj
+		StartupItem = Master\Master.csproj
 	EndGlobalSection
 EndGlobal
