@@ -15,8 +15,13 @@ namespace Master
 			List<string> workersWithErrors = new List <string>();
 			foreach (var worker in WorkersUtil.listOfWorkers) {
 				var client = new JsonServiceClient (worker);
-				Worker.LsResponse response = client.Get (new Worker.Ls ());
-				if (response.IsErrorResponse()) {
+				Worker.LsResponse response = null;
+				try{
+					 response = client.Get (new Worker.Ls ());}
+				catch (Exception e){
+
+				}
+				if (response == null || response.IsErrorResponse()) {
 					workersWithErrors.Add (worker);
 					continue;
 				}
