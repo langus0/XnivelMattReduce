@@ -6,7 +6,7 @@ using Common;
 namespace Worker
 {
 	[Route("/dfs/ls")]
-	public class Ls
+	public class Ls: IReturn<LsResponse>
 	{
 	}
 

@@ -1,9 +1,8 @@
 using System;
 using ServiceStack;
-using Funq;
 using ServiceStack.Text;
+using Funq;
 using ServiceStack.Logging;
-
 
 namespace Master
 {
@@ -15,6 +14,17 @@ namespace Master
 
 		public override void Configure (Container container)
 		{
+			this.ServiceExceptionHandlers.Add((httpReq, request, exception) => {
+				//log your exceptions here
+
+				System.Console.WriteLine(exception.Message);
+				System.Console.WriteLine(exception.StackTrace);
+					//call default exception handler or prepare your own custom response
+					return DtoUtils.CreateErrorResponse(request, exception);
+			});
+
+
+
 			var config = new HostConfig ();
 			config.DebugMode = true; //Show StackTraces in service responses during development
 			config.WriteErrorsToResponse = true;

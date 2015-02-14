@@ -13,10 +13,15 @@ namespace Worker
 	public class WorkerHost : AppSelfHostBase
 	{
 
-		public WorkerHost () : base("XnivelMattReduce Worker", typeof(DfsService).Assembly)
+		public WorkerHost () : base("XnivelMattReduce Worker", typeof(DfsWorkerService).Assembly)
 		{
 		}
 
+		
+		public override ServiceStackHost Start (string urlBase)
+		{
+			return base.Start (urlBase);
+		}
 		public override void Configure (Container container)
 		{
 			var config = new HostConfig ();

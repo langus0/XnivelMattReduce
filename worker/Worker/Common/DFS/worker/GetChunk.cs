@@ -4,7 +4,7 @@ using Common;
 namespace Worker
 {
 	[Route("/dfs/getchunk/{FileName}/{chunkId}", "GET")]
-	public class GetChunk
+	public class GetChunk: IReturn<GetChunkResponse>
 	{
 
 		public string FileName{ get; set; }

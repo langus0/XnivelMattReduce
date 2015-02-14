@@ -3,7 +3,7 @@ using ServiceStack;
 
 namespace Worker
 {
-	public class DfsService: Service
+	public class DfsWorkerService: Service
 	{
 		public object Any (Ls request)
 		{

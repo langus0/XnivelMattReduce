@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 using ServiceStack;
-
+using Common;
 namespace Master
 {
 	public class DfsMasterService: Service
@@ -8,7 +9,8 @@ namespace Master
 
 		public object Any (Ls request)
 		{
-			return new LsResponse() ;
+			var result = DfsUtils.listFiles ();
+			return new LsResponse{Result = result.Item1, inactiveWorkers = result.Item2} ;
 		}
 	}
 }

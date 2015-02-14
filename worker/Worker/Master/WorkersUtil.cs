@@ -13,9 +13,6 @@ namespace Master
 			listOfWorkers.AddRange(listFromConfig.Split (';'));
 
 		}
-
-
-
 	}
 }
 

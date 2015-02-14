@@ -45,6 +45,7 @@
     <Reference Include="ServiceStack">
       <HintPath>..\packages\ServiceStack.4.0.36\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="DFS\worker\SaveChunk.cs" />
     <Compile Include="DFS\utils\DfsUtils.cs" />
     <Compile Include="DFS\master\Ls.cs" />
+    <Compile Include="DFS\dto\ChunksGroup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

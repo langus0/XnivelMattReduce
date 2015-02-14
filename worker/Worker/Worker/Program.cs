@@ -13,7 +13,6 @@ namespace Worker
 
 			Console.WriteLine ("WorkerHost Created at {0}, listening on {1}", 
 			                   DateTime.Now, listeningOn);
-
 			Console.ReadKey ();
 			
 		}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Worker;
 
 namespace Common
@@ -8,43 +9,67 @@ namespace Common
 	{
 		public String fileName{ get; set; }
 
-		private List<ChunkHeader> chunksHeaders{ get; set; }
+		private HashSet<ChunksGroup> chunks{ get; set; }
 
-		public bool corrupted {
+		public int accessibleReplicas{ get {
+				return 	(from chunk in chunks 
+						select chunk.Replicas).Min ();
+
+			} }
+
+		public int chunksCount {
 			get {
-				if (chunksHeaders.Count == 0) {
-					return true;
-				}
-
-				HashSet<int> idsOfChunks = getUniqChunkIds ();
-				int max = int.MinValue;
-				foreach (var chunkId in idsOfChunks) {
-					max = Math.Max (max, chunkId);
-				}
-				return idsOfChunks.Count != max;
+				var max = (from chunk in chunks 
+				             select chunk.chunkId).Max ();
+				//+1 beacuse chunks are numerated from 0
+				return max + 1;
 			}
 		}
 
+		public bool corrupted {
+			get {
+				if (chunks.Count == 0) {
+					return true;
+				}
+				return chunks.Count != chunksCount;
+			}
+		}
 
 		public long sizeInBytes {
 			get {
 				long sum = 0;
-				foreach (var chunk in chunksHeaders) {
+				foreach (var chunk in chunks) {
 					sum += chunk.sizeInBytes;
 				}
 				return sum;
 			}
 		}
 
-		private HashSet<int> getUniqChunkIds(){
-			HashSet<int> idsOfChunks = new HashSet<int> ();
-			foreach (var chunk in chunksHeaders) {
-				idsOfChunks.Add (chunk.chunkId);
-				if (chunk.chunkId < 0) {
-					throw new ArgumentException("Chunk has negative id!");
-				}
+		public FileHeader (ChunksGroup chunk)
+		{
+			fileName = chunk.fileName;
+			chunks = new HashSet<ChunksGroup> ();
+			chunks.Add (chunk);
+		}
+
+		public void addChunk (ChunksGroup chunk)
+		{
+			if (fileName != chunk.fileName) {
+				throw new ArgumentException ("Intent to add chunk to diffrent file");
 			}
-			return idsOfChunks;
+			if (chunk.chunkId < 0) {
+				throw new ArgumentException ("Chunk has negative id!");
+			}
+			if (chunks.Contains (chunk)) {
+				foreach (var c in chunks) {
+					if (c.Equals (chunk)) {
+						c.merge (chunk);
+					}
+				}
+			} else {
+				chunks.Add (chunk);
+			}
+
 		}
 	}
 }
