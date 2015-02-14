@@ -29,11 +29,11 @@ namespace Worker
 		public static Chunk readChunk (String name, int id)
 		{
 			String filePath = Path.Combine (GetWorkingDirectory (), id.ToString () + DfsUtils.CHUNKID_SEPARATOR + name);
-			if (!File.Exists (filePath)) {
+			if (!System.IO.File.Exists (filePath)) {
 				throw new ArgumentException ("Chunk does not exists!");
 			}
 			Chunk chunk = new Chunk ();
-			chunk.data = File.ReadAllBytes (filePath);
+			chunk.data = System.IO.File.ReadAllBytes (filePath);
 			chunk.header = new ChunkHeader (new FileInfo (filePath));
 			return chunk;
 		}
@@ -41,10 +41,10 @@ namespace Worker
 		public static void writeChunk (String name, int id, byte[] data)
 		{
 			String filePath = Path.Combine (GetWorkingDirectory (), id.ToString () + DfsUtils.CHUNKID_SEPARATOR + name);
-			if (File.Exists (filePath)) {
+			if (System.IO.File.Exists (filePath)) {
 				throw new ArgumentException ("File already exists!");
 			}
-			File.WriteAllBytes (filePath, data);
+			System.IO.File.WriteAllBytes (filePath, data);
 		}
 
 		public static void createWorkingDirectory ()

@@ -10,7 +10,14 @@ namespace Master
 		public object Any (Ls request)
 		{
 			var result = DfsUtils.listFiles ();
-			return new LsResponse{Result = result.Item1, inactiveWorkers = result.Item2} ;
+			return new LsResponse{Result = new List<FileHeader>(result.Item1.Values.ToArray()), inactiveWorkers = result.Item2} ;
+		}
+
+		public object Get (GetFile request)
+		{
+			var result = DfsUtils.readFileFromDfs (request.FileName);
+			return new GetFileResponse { Result = result };
+
 		}
 	}
 }

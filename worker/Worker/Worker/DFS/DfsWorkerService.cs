@@ -12,7 +12,7 @@ namespace Worker
 
 		public object Get (GetChunk request)
 		{
-			return new GetChunkResponse { Result= DfsWorkerUtils.readChunk(request.FileName,request.chunkId) };
+			return new GetChunkResponse { Result = DfsWorkerUtils.readChunk(request.FileName,request.chunkId) };
 		}
 
 		public object Put (SaveChunk request)

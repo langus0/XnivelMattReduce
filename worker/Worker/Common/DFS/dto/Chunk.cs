@@ -4,8 +4,8 @@ namespace Common
 {
 	public class Chunk
 	{
-		public ChunkHeader header;
-		public byte[] data;
+		public ChunkHeader header{ get; set; }
+		public byte[] data{ get; set; }
 	}
 }
 

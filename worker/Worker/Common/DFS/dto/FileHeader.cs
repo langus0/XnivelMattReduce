@@ -52,6 +52,14 @@ namespace Common
 			chunks.Add (chunk);
 		}
 
+		public List<ChunksGroup> getChunksSorted ()
+		{
+			var chunksOrdered = from chunk in chunks 
+						  orderby chunk.chunkId
+			              select chunk;
+			return chunksOrdered.ToList();
+		}
+
 		public void addChunk (ChunksGroup chunk)
 		{
 			if (fileName != chunk.fileName) {

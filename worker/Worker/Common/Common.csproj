@@ -58,6 +58,8 @@
     <Compile Include="DFS\utils\DfsUtils.cs" />
     <Compile Include="DFS\master\Ls.cs" />
     <Compile Include="DFS\dto\ChunksGroup.cs" />
+    <Compile Include="DFS\dto\File.cs" />
+    <Compile Include="DFS\master\GetFile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
