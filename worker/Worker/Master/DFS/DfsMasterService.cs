@@ -19,6 +19,10 @@ namespace Master
 			return new GetFileResponse { Result = result };
 
 		}
+		public object Delete(DeleteFile request){
+			DfsUtils.deleteFileFromDfs (request.FileName);
+			return true;
+		}
 	}
 }
 

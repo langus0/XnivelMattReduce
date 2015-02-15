@@ -20,6 +20,20 @@ namespace Worker
 			DfsWorkerUtils.writeChunk (request.FileName, request.chunkId, request.data);
 			return new SaveChunkResponse ();
 		}
+
+		public object Delete (DeleteChunk request)
+		{
+			if (request.chunkId < -1) {
+				throw new Exception ("Chunk ID can not be negative! (Eventually use -1 to delete all chunks)");
+			}
+
+			if (request.chunkId == -1) { //delete all chunks of file
+				DfsWorkerUtils.deleteAllChunksOfFile (request.FileName);
+			} else {
+				DfsWorkerUtils.deleteChunk (request.FileName, request.chunkId);
+			}
+			return true;
+		}
 	}
 }
 

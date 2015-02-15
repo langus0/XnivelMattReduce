@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using Common;
 
 namespace Worker
@@ -46,6 +47,32 @@ namespace Worker
 			}
 			System.IO.File.WriteAllBytes (filePath, data);
 		}
+
+		public static void deleteChunk (String name, int id)
+		{
+			String filePath = Path.Combine (GetWorkingDirectory (), id.ToString () + DfsUtils.CHUNKID_SEPARATOR + name);
+			if (!System.IO.File.Exists (filePath)) {
+				throw new ArgumentException ("Chunk not exists!");
+			}
+			System.IO.File.Delete (filePath);
+		}
+
+		public static void deleteAllChunksOfFile (String name)
+		{
+			var fileChunks = (from chunk in DfsWorkerUtils.listWorkingDirectory ()
+			                  where chunk.fileName == name
+			                  select chunk).ToList ();
+			if (fileChunks.Count == 0) {
+				throw new ArgumentException ("No chunk of file exists on this worker!"); 
+			}
+			foreach (var chunks in fileChunks) {
+				DfsWorkerUtils.deleteChunk (name, chunks.chunkId);
+			}
+		}
+
+
+
+
 
 		public static void createWorkingDirectory ()
 		{
