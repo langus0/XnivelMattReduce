@@ -1,41 +1,28 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ApiMaperReducer/ApiMapper.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Common/Reducer/SendData.cs" Line="10" Column="1" />
-      <File FileName="Common/DFS/worker/SaveChunk.cs" Line="7" Column="1" />
-      <File FileName="ApiMaperReducer/ApiMapper.cs" Line="16" Column="16" />
-      <File FileName="ApiMaperReducer/ApiGlobal.cs" Line="9" Column="3" />
+      <File FileName="Master/DFS/utils/DfsUtils.cs" Line="129" Column="17" />
+      <File FileName="Master/MasterHost.cs" Line="26" Column="5" />
+      <File FileName="Worker/DFS/utils/DfsWorkerUtils.cs" Line="40" Column="37" />
+      <File FileName="Worker/DFS/DfsWorkerService.cs" Line="14" Column="4" />
+      <File FileName="Common/DFS/worker/SaveChunk.cs" Line="8" Column="51" />
+      <File FileName="Common/DFS/dto/Chunk.cs" Line="16" Column="69" />
+      <File FileName="Master/WorkersUtil.cs" Line="1" Column="1" />
+      <File FileName="Master/Program.cs" Line="1" Column="1" />
+      <File FileName="Master/DFS/DfsMasterService.cs" Line="10" Column="3" />
+      <File FileName="Master/packages.config" Line="1" Column="1" />
+      <File FileName="Common/DFS/worker/Ls.cs" Line="13" Column="17" />
+      <File FileName="Common/DFS/worker/DeleteChunk.cs" Line="7" Column="56" />
+      <File FileName="Common/DFS/dto/File.cs" Line="1" Column="1" />
+      <File FileName="Common/DFS/dto/FileHeader.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="ApiMaperReducer" expanded="True" selected="True">
-            <Node name="References" expanded="True" />
-          </Node>
-          <Node name="Common" expanded="True">
-            <Node name="DFS" expanded="True">
-              <Node name="worker" expanded="True" />
-            </Node>
-            <Node name="Hash" expanded="True" />
-            <Node name="Reducer" expanded="True" />
-          </Node>
-          <Node name="Master" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="DFS" expanded="True">
-              <Node name="utils" expanded="True" />
-            </Node>
-          </Node>
-          <Node name="Worker" expanded="True" />
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/langus0/git/XnivelMattReduce/worker/Worker/Worker/DFS/utils/DfsWorkerUtils.cs" line="40" column="1" />
+      <Breakpoint file="/home/langus0/git/XnivelMattReduce/worker/Worker/Worker/DFS/DfsWorkerService.cs" line="20" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

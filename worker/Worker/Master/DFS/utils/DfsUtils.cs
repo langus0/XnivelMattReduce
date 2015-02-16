@@ -135,9 +135,6 @@ namespace Master
 
 				}
 			}
-			foreach (var chunk in workers) {
-				chunk.Dispose ();
-			}
 		}
 
 		private static List<Chunk> splitFileIntoChunks (Common.File file)
