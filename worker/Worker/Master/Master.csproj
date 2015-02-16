@@ -50,7 +50,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="NLog">
-      <HintPath>..\packages\NLog.2.1.0\lib\net40\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Logging.NLog">
       <HintPath>..\packages\ServiceStack.Logging.NLog.4.0.36\lib\net40\ServiceStack.Logging.NLog.dll</HintPath>

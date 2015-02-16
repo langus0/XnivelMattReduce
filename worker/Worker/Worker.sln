@@ -7,12 +7,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Master", "Master\Master.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{9E31C03B-47CC-486F-BE6B-533982B8311A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiMaperReducer", "ApiMaperReducer\ApiMaperReducer.csproj", "{0337EF79-37C4-4A54-B4C9-77A755B2F75E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleMapper", "ExampleMapper\ExampleMapper.csproj", "{0F1C170E-91C5-4FBE-826F-95AAC94CF676}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0337EF79-37C4-4A54-B4C9-77A755B2F75E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0337EF79-37C4-4A54-B4C9-77A755B2F75E}.Debug|x86.Build.0 = Debug|Any CPU
+		{0337EF79-37C4-4A54-B4C9-77A755B2F75E}.Release|x86.ActiveCfg = Release|Any CPU
+		{0337EF79-37C4-4A54-B4C9-77A755B2F75E}.Release|x86.Build.0 = Release|Any CPU
+		{0F1C170E-91C5-4FBE-826F-95AAC94CF676}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F1C170E-91C5-4FBE-826F-95AAC94CF676}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F1C170E-91C5-4FBE-826F-95AAC94CF676}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F1C170E-91C5-4FBE-826F-95AAC94CF676}.Release|x86.Build.0 = Release|Any CPU
 		{0F6C4E78-383F-482C-BC43-883776ED48DB}.Debug|x86.ActiveCfg = Debug|x86
 		{0F6C4E78-383F-482C-BC43-883776ED48DB}.Debug|x86.Build.0 = Debug|x86
 		{0F6C4E78-383F-482C-BC43-883776ED48DB}.Release|x86.ActiveCfg = Release|x86
@@ -27,6 +39,6 @@ Global
 		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Master\Master.csproj
+		StartupItem = ApiMaperReducer\ApiMaperReducer.csproj
 	EndGlobalSection
 EndGlobal

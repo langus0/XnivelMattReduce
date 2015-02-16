@@ -46,6 +46,7 @@
       <HintPath>..\packages\ServiceStack.4.0.36\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="Mono.Security" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +63,8 @@
     <Compile Include="DFS\master\GetFile.cs" />
     <Compile Include="DFS\master\DeleteFile.cs" />
     <Compile Include="DFS\worker\DeleteChunk.cs" />
+    <Compile Include="Hash\HashUtils.cs" />
+    <Compile Include="Reducer\SendData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -70,5 +73,7 @@
   <ItemGroup>
     <Folder Include="DFS\master\" />
     <Folder Include="DFS\utils\" />
+    <Folder Include="Hash\" />
+    <Folder Include="Reducer\" />
   </ItemGroup>
 </Project>
