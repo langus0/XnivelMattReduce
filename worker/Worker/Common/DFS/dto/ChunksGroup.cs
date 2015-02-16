@@ -14,7 +14,6 @@ namespace Common
 		{
 			fileName = header.fileName;
 			chunkId = header.chunkId;
-			sizeInBytes = header.sizeInBytes;
 			storedInWorkers.Add (worker);
 		}
 

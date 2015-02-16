@@ -17,8 +17,8 @@ namespace Worker
 
 		public object Put (SaveChunk request)
 		{
-			DfsWorkerUtils.writeChunk (request.FileName, request.chunkId, request.data);
-			return new SaveChunkResponse ();
+			DfsWorkerUtils.writeChunk (request.chunk);
+			return true;
 		}
 
 		public object Delete (DeleteChunk request)

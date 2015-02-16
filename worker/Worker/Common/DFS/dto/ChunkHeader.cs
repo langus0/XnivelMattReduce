@@ -18,6 +18,10 @@ namespace Common
 			fileName = tuple.Item1;
 			sizeInBytes = fileInfo.Length;
 		}
+
+		public ChunkHeader ()
+		{
+		}
 	}
 }
 

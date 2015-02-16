@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Text;
+using System.Linq;
 using ServiceStack;
 using ServiceStack.Logging;
 using Common;
@@ -21,6 +23,7 @@ namespace Master
 				var client = new JsonServiceClient (worker);
 				Worker.LsResponse response = null;
 				try {
+					log.InfoFormat ("List request to {0}", worker);
 					response = client.Get (new Worker.Ls ());
 				} catch (Exception e) {
 					log.Error (e);
@@ -37,11 +40,11 @@ namespace Master
 					}
 				}
 			}
-			log.Info ("Listing DFS: done ({0} files, problems with {1})".FormatWith(files.Count, workersWithErrors.ToJson()));
+			log.Info ("Listing DFS: done ({0} files, problems with {1})".FormatWith (files.Count, workersWithErrors.ToJson ()));
 			return Tuple.Create (files, workersWithErrors);
 		}
 
-		public static File readFileFromDfs (string fileName)
+		public static Common.File readFileFromDfs (string fileName)
 		{
 			var lsResult = listFiles ();
 			var files = lsResult.Item1;
@@ -55,9 +58,8 @@ namespace Master
 				throw new Exception ("Can't read file: File is corrupted!");
 			}
 
-			var file = new File (fileName, fileHeader.chunksCount);
-			file.data = new byte[fileHeader.sizeInBytes];
-			int idx = 0;
+			var file = new Common.File (fileName, fileHeader.chunksCount);
+			//int idx = 0;
 
 			foreach (var chunk in fileHeader.getChunksSorted()) {
 				bool chunkDownloaded = false;
@@ -75,8 +77,9 @@ namespace Master
 						continue;
 					}
 
-					Array.Copy (response.Result.data, 0, file.data, idx, response.Result.data.Length);
-					idx += response.Result.data.Length;
+					file.data.AddRange (response.Result.data);
+					//Array.Copy (response.Result.data, 0, file.data, idx, response.Result.data.Length);
+					//idx += response.Result.data.Length;
 					chunkDownloaded = true;
 					break;
 				}
@@ -96,7 +99,7 @@ namespace Master
 
 			foreach (var worker in WorkersUtil.listOfWorkers) {
 				var client = new JsonServiceClient (worker);
-				System.Net.HttpWebResponse response = null;
+				Worker.DeleteChunkResponse response = null;
 				try {
 					log.Info ("Deleting chunks of {0} from {1}".FormatWith (fileName, worker));
 					response = client.Delete (new Worker.DeleteChunk { chunkId = -1, FileName = fileName });
@@ -108,7 +111,61 @@ namespace Master
 					continue;
 				}
 			}
-			log.Warn ("During deletion of file {0} having problem with workers: {1}".FormatWith(fileName,workersWithErrors.ToJson ()));
+			log.Warn ("During deletion of file {0} having problem with workers: {1}".FormatWith (fileName, workersWithErrors.ToJson ()));
+		}
+
+		public static void saveFileInDfs (Common.File file, int numOfReplcas)
+		{
+			var chunks = splitFileIntoChunks (file);
+			var workers = getClientsToActiveWorkers ();
+			if (workers.Count < numOfReplcas) {
+				throw new ArgumentException ("You can not create more replicas than workers!");
+			}
+
+			int workerId = 0;
+			foreach (var chunk in chunks) {	
+				for (int i = 0; i<numOfReplcas; i++) {
+					var worker = workers [workerId++ % workers.Count];
+					log.InfoFormat ("Saving {0} chunk of {1} in {2}", chunk.chunkId, chunk.fileName, worker.BaseUri);
+
+					var request = new Worker.SaveChunk ();
+					request.chunk = chunk;
+					log.Debug (request.ToJsv ());
+					worker.Put (request);
+
+				}
+			}
+			foreach (var chunk in workers) {
+				chunk.Dispose ();
+			}
+		}
+
+		private static List<Chunk> splitFileIntoChunks (Common.File file)
+		{
+			List<Chunk> chunks = new List<Chunk> ();
+			var fileContent = file.data;
+			int sizeOfChunk = fileContent.Count / file.chunksCount;
+			int howManyChunks = Convert.ToInt32 (Math.Ceiling (fileContent.Count / (double)sizeOfChunk));
+
+			for (int i =0; i < howManyChunks; i++) {
+				var start = i * sizeOfChunk;
+				var size = Math.Min (fileContent.Count - start, sizeOfChunk);
+				//var data = new ArraySegment<string> (fileContent, start, end);
+				chunks.Add (new Chunk { fileName=file.fileName, chunkId = chunks.Count, data= fileContent.GetRange (start, size) });
+			}
+			return chunks;
+		
+		}
+
+		private static List<JsonServiceClient> getClientsToActiveWorkers ()
+		{
+			var lsResult = listFiles ();
+			var listOfWorkers = WorkersUtil.listOfWorkers.Except (lsResult.Item2).ToList ();
+			return (from worker in listOfWorkers
+				select new JsonServiceClient (worker)).ToList ();
+			//for (int i = 0;; i++) {
+			//	yield return listOfWorkers [i % listOfWorkers.Count];
+			//}
 		}
 	}
 }

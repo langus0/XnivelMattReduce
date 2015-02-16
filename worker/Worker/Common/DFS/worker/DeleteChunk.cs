@@ -4,7 +4,7 @@ using ServiceStack;
 namespace Worker
 {
 	[Route("/dfs/deleteChunk/{FileName}/{chunkId}", "DELETE")]
-	public class DeleteChunk 
+	public class DeleteChunk :IReturn<DeleteChunkResponse>
 	{
 
 		public string FileName{ get; set; }
@@ -15,5 +15,6 @@ namespace Worker
 	public class DeleteChunkResponse{
 
 	}
+	
 }
 

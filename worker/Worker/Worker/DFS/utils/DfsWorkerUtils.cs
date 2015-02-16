@@ -16,8 +16,6 @@ namespace Worker
 			return ConfigurationManager.AppSettings ["WorkingDirectory"];
 		}
 
-
-
 		public static List<ChunkHeader> listWorkingDirectory ()
 		{
 			List<ChunkHeader> list = new List<ChunkHeader> ();
@@ -34,18 +32,20 @@ namespace Worker
 				throw new ArgumentException ("Chunk does not exists!");
 			}
 			Chunk chunk = new Chunk ();
-			chunk.data = System.IO.File.ReadAllBytes (filePath);
-			chunk.header = new ChunkHeader (new FileInfo (filePath));
-			return chunk;
+			var data = System.IO.File.ReadAllLines (filePath).ToList();
+			return new Chunk (new FileInfo (filePath), data);
 		}
 
-		public static void writeChunk (String name, int id, byte[] data)
+		public static void writeChunk(Chunk chunk){
+			writeChunk (chunk.fileName, chunk.chunkId, chunk.data);
+		}
+		public static void writeChunk (String name, int id, List<string> data)
 		{
 			String filePath = Path.Combine (GetWorkingDirectory (), id.ToString () + DfsUtils.CHUNKID_SEPARATOR + name);
 			if (System.IO.File.Exists (filePath)) {
 				throw new ArgumentException ("File already exists!");
 			}
-			System.IO.File.WriteAllBytes (filePath, data);
+			System.IO.File.WriteAllLines (filePath, data);
 		}
 
 		public static void deleteChunk (String name, int id)
@@ -70,17 +70,11 @@ namespace Worker
 			}
 		}
 
-
-
-
-
 		public static void createWorkingDirectory ()
 		{
 			string path = GetWorkingDirectory ();
 
-			bool exists = System.IO.Directory.Exists (path);
-
-			if (!exists) {
+			if (!System.IO.Directory.Exists (path)) {
 				System.IO.Directory.CreateDirectory (path);
 			}
 

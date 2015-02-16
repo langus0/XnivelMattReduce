@@ -19,11 +19,11 @@ done
 fi
 
 type=$2
-if [ "$type" == "m" -o "$type" == "" ]; then
+if [ "$type" == "m" -o "$type" == "a" ]; then
 xterm -e "mono Master/bin/Debug/Master.exe" &
 fi
 
-if [ "$type" == "w" -o "$type" == "" ]; then
+if [ "$type" == "w" -o "$type" == "a" ]; then
 	if [ $numOfWorkers -gt 0 ]; then
 		for i in `seq $numOfWorkers`; do
 			echo "mono /tmp/Worker-$i/Worker.exe http://*:$((1336+$i))/"
