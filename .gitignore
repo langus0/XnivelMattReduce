@@ -1,0 +1,5 @@
+workdir/*
+worker/Worker/packages/*
+**/bin/*
+*.userprefs
+*~
