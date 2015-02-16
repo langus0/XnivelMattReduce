@@ -1,0 +1,41 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ApiMaperReducer/ApiMapper.cs">
+    <Files>
+      <File FileName="Common/Reducer/SendData.cs" Line="10" Column="1" />
+      <File FileName="Common/DFS/worker/SaveChunk.cs" Line="7" Column="1" />
+      <File FileName="ApiMaperReducer/ApiMapper.cs" Line="16" Column="16" />
+      <File FileName="ApiMaperReducer/ApiGlobal.cs" Line="9" Column="3" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="ApiMaperReducer" expanded="True" selected="True">
+            <Node name="References" expanded="True" />
+          </Node>
+          <Node name="Common" expanded="True">
+            <Node name="DFS" expanded="True">
+              <Node name="worker" expanded="True" />
+            </Node>
+            <Node name="Hash" expanded="True" />
+            <Node name="Reducer" expanded="True" />
+          </Node>
+          <Node name="Master" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="DFS" expanded="True">
+              <Node name="utils" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="Worker" expanded="True" />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

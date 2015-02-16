@@ -1,0 +1,498 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NodaTime.Serialization.ServiceStackText</name>
+    </assembly>
+    <members>
+        <member name="T:NodaTime.Serialization.ServiceStackText.ComplexJsonIntervalSerializer">
+            <summary>
+            ServiceStack.Text JSON serializer for <see cref="T:NodaTime.Interval"/> using a compound representation. The start and
+            end aspects of the interval are represented with separate properties, each parsed and formatted
+            by the <see cref="T:NodaTime.Instant"/> serializer provided.
+            </summary> 
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.IServiceStackSerializer`1">
+            <summary>
+            A JSON serializer for types which can be represented by a single string value, parsed or formatted.
+            </summary>
+            <typeparam name="T">The type to convert to/from JSON.</typeparam>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.IServiceStackSerializer`1.Serialize(`0)">
+            <summary>
+            Serializes an object of <typeparamref name="T"/> to JSON.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.IServiceStackSerializer`1.Deserialize(System.String)">
+            <summary>
+            Deserializes JSON to an object of <typeparamref name="T"/>.
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.IServiceStackSerializer`1.UseRawSerializer">
+            <summary>
+            When true, JsConfig RawSerializeFn and RawDeserializeFn are set.
+            Otherwise SerializeFn and DeSerializeFn are set.
+            </summary>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ComplexJsonIntervalSerializer.#ctor(NodaTime.Serialization.ServiceStackText.IServiceStackSerializer{NodaTime.Instant})">
+            <summary>
+            Creates a new instance of an <see cref="T:NodaTime.Interval"/> serializer that uses a complex JSON representation.
+            </summary>
+            <param name="instantSerializer">The serializer to use to parse and format the start and 
+            end <see cref="T:NodaTime.Instant"/>.</param>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ComplexJsonIntervalSerializer.Serialize(NodaTime.Interval)">
+            <summary>
+            Serializes the provided <see cref="T:NodaTime.Interval"/>.
+            </summary>
+            <param name="value">The <see cref="T:NodaTime.Interval"/> to to serialize.</param>
+            <returns>The serialized representation.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ComplexJsonIntervalSerializer.Deserialize(System.String)">
+            <summary>
+            Deserializes the given JSON.
+            </summary>
+            <param name="text">The JSON to parse.</param>
+            <returns>The deserialized <see cref="T:NodaTime.Interval"/>.</returns>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.ComplexJsonIntervalSerializer.UseRawSerializer">
+            <summary>
+            <see cref="T:NodaTime.Serialization.ServiceStackText.ComplexJsonIntervalSerializer"/> uses the ServiceStack.Text raw serializer.
+            </summary>
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.DateTimeZoneSerializer">
+            <summary>
+            ServiceStack.Text JSON serializer for <see cref="T:NodaTime.DateTimeZone"/> for the given <see cref="T:NodaTime.IDateTimeZoneProvider"/>.
+            Deserialization is case insensitive.
+            </summary> 
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.DateTimeZoneSerializer.#ctor(NodaTime.IDateTimeZoneProvider)">
+            <summary>
+            Creates an instance of the <see cref="T:NodaTime.DateTimeZone"/> serializer for the given <see cref="T:NodaTime.IDateTimeZoneProvider"/>.
+            </summary>
+            <param name="provider">The <see cref="T:NodaTime.IDateTimeZoneProvider"/> to use.</param>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.DateTimeZoneSerializer.Serialize(NodaTime.DateTimeZone)">
+            <summary>
+            Serializes the provided <see cref="T:NodaTime.DateTimeZone"/>.
+            </summary>
+            <param name="value">The <see cref="T:NodaTime.DateTimeZone"/> to serialize.</param>
+            <returns>The serialized representation.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.DateTimeZoneSerializer.Deserialize(System.String)">
+            <summary>
+            Deserializes the given JSON.
+            </summary>
+            <param name="text">The JSON to parse.</param>
+            <returns>The deserialized <see cref="T:NodaTime.DateTimeZone"/>.</returns>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DateTimeZoneSerializer.UseRawSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Serialization.ServiceStackText.DateTimeZoneSerializer"/> does not use the raw serializer.
+            </summary>
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings">
+            <summary>
+            A collection of typical ServiceStack.Text JSON serializers for use with NodaTime.
+            </summary>
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings">
+            <summary>
+            Provides the ServiceStack.Text JSON serializers to use for NodaTime. 
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.DateTimeZoneSerializer">
+            <summary>
+            The <see cref="T:NodaTime.DateTimeZone"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.DurationSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Duration"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.InstantSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Instant"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.IntervalSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Interval"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.LocalDateSerializer">
+            <summary>
+            The <see cref="T:NodaTime.LocalDate"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.LocalDateTimeSerializer">
+            <summary>
+            The <see cref="T:NodaTime.LocalDateTime"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.LocalTimeSerializer">
+            <summary>
+            The <see cref="T:NodaTime.LocalTime"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.OffsetSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Offset"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.OffsetDateTimeSerializer">
+            <summary>
+            The <see cref="T:NodaTime.OffsetDateTime"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.PeriodSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Period"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.ZonedDateTimeSerializer">
+            <summary>
+            The <see cref="T:NodaTime.ZonedDateTime"/> ServiceStack.Text JSON serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.INodaSerializerSettings.Provider">
+            <summary>
+            The <see cref="T:NodaTime.IDateTimeZoneProvider"/> in use.
+            </summary>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.#ctor(NodaTime.IDateTimeZoneProvider)">
+            <summary>
+            Creates an instance of default serializers using the given <see cref="T:NodaTime.IDateTimeZoneProvider"/>.
+            </summary>
+            <param name="provider"></param>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.DateTimeZoneSerializer">
+            <summary>
+            The <see cref="T:NodaTime.DateTimeZone"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.DurationSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Duration"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.InstantSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Instant"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.IntervalSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Interval"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.LocalDateSerializer">
+            <summary>
+            The <see cref="T:NodaTime.LocalDate"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.LocalDateTimeSerializer">
+            <summary>
+            The <see cref="T:NodaTime.LocalDateTime"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.LocalTimeSerializer">
+            <summary>
+            The <see cref="T:NodaTime.LocalTime"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.OffsetSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Offset"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.OffsetDateTimeSerializer">
+            <summary>
+            The <see cref="T:NodaTime.OffsetDateTime"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.PeriodSerializer">
+            <summary>
+            The <see cref="T:NodaTime.Period"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.ZonedDateTimeSerializer">
+            <summary>
+            The <see cref="T:NodaTime.ZonedDateTime"/> serializer to use.
+            </summary>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.DefaultNodaSerializerSettings.Provider">
+            <summary>
+            The <see cref="T:NodaTime.IDateTimeZoneProvider"/> in use.
+            </summary>
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.ExtendedIsoIntervalSerializer">
+            <summary>
+            ServiceStack.Text JSON serializer for <see cref="T:NodaTime.Interval"/> using a ISO8601 Interval representation. The 
+            start and end aspects of the interval are each parsed and formatted by the <see cref="T:NodaTime.Instant"/> serializer 
+            provided.
+            </summary> 
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ExtendedIsoIntervalSerializer.#ctor(NodaTime.Serialization.ServiceStackText.IServiceStackSerializer{NodaTime.Instant})">
+            <summary>
+            Creates an instance of the <see cref="T:NodaTime.Serialization.ServiceStackText.ExtendedIsoIntervalSerializer"/>
+            </summary>
+            <param name="instantSerializer">The <see cref="T:NodaTime.Instant"/> serializer to use.</param>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ExtendedIsoIntervalSerializer.Serialize(NodaTime.Interval)">
+            <summary>
+            Serializes the provided <see cref="T:NodaTime.Interval"/>.
+            </summary>
+            <param name="value">The <see cref="T:NodaTime.Interval"/> to to serialize.</param>
+            <returns>The serialized representation.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ExtendedIsoIntervalSerializer.Deserialize(System.String)">
+            <summary>
+            Deserializes the given JSON.
+            </summary>
+            <param name="text">The JSON to parse.</param>
+            <returns>The deserialized <see cref="T:NodaTime.Interval"/>.</returns>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.ExtendedIsoIntervalSerializer.UseRawSerializer">
+            <summary>
+            <see cref="T:NodaTime.Serialization.ServiceStackText.ExtendedIsoIntervalSerializer"/> does not use the ServiceStack.Text raw serializer.
+            </summary>
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.Extensions">
+            <summary>
+                Useful extensions used to configure the ServiceStack.Text JSON serializer.
+            </summary>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.Extensions.SetSerializer(NodaTime.Serialization.ServiceStackText.INodaSerializerSettings,System.Action{NodaTime.Serialization.ServiceStackText.INodaSerializerSettings})">
+            <summary>
+                Used for fluent setting of serializerSettings. Nothing is done if the serializer or config action is null.
+            </summary>
+            <param name="serializerSettings">The serializer to perform the action on.</param>
+            <param name="configAction">The configuration action to perform on the serializerSettings.</param>
+            <returns>The original <param ref="serializerSettings" /> value, for further chaining.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.Extensions.WithIsoIntervalSerializer(NodaTime.Serialization.ServiceStackText.INodaSerializerSettings)">
+            <summary>
+                Configures the given serializer settings to use
+                <see cref="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.ExtendedIsoIntervalSerializer"/>.
+                Any other converters which can convert <see cref="T:NodaTime.Interval"/> are removed from the serializer.
+            </summary>
+            <param name="serializerSettings">The existing serializer settings to add Noda Time serializerSettings to.</param>
+            <returns>The original <param ref="serializerSettings"/> value, for further chaining.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.Extensions.WithNormalizingIsoPeriodSerializer(NodaTime.Serialization.ServiceStackText.INodaSerializerSettings)">
+            <summary>
+                Configures the given serializer settings to use
+                <see cref="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.NormalizingIsoPeriodSerializer"/>.
+                Any other converters which can convert <see cref="T:NodaTime.Period"/> are removed from the serializer.
+            </summary>
+            <param name="serializerSettings">The existing serializer settings to add Noda Time serializerSettings to.</param>
+            <returns>The original <param ref="serializerSettings"/> value, for further chaining.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.Extensions.WithGeneralIsoZonedDateTimeSerializer(NodaTime.Serialization.ServiceStackText.INodaSerializerSettings)">
+            <summary>
+                Configures the <see cref="T:NodaTime.ZonedDateTime"/> serializer to use a format compatible 
+                with the ToString method. 
+            </summary>
+            <param name="serializerSettings">The existing serializer settings to add Noda Time serializerSettings to.</param>
+            <returns>The original <param ref="serializerSettings"/> value, for further chaining.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.Extensions.CreateDefaultSerializersForNodaTime(NodaTime.IDateTimeZoneProvider)">
+            <summary>
+                Configuration for ServiceStack.Text with everything required to properly serialize and deserialize NodaTime data
+                types to and from json.
+            </summary>
+            <param name="provider">The time zone provider to use when parsing time zones and zoned date/times.</param>
+            <returns>A new Noda serializer settings.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.Extensions.ConfigureSerializersForNodaTime(NodaTime.Serialization.ServiceStackText.INodaSerializerSettings)">
+            <summary>
+                Configures the ServiceStack.Text json serializer.
+            </summary>
+            <param name="nodaSerializerSettings">The serializer settings to use.</param>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.Extensions.ConfigureSerializer``1(NodaTime.Serialization.ServiceStackText.IServiceStackSerializer{``0})">
+            <summary>
+                Configures the ServiceStack.Text json serializer.
+            </summary>
+            <param name="serializer">The individual serializer to configure.</param>
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions">
+            <summary>
+            Convenience class to expose preconfigured serializers for Noda Time types, and factory methods
+            for creating those which require parameters.
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.ComplexIntervalSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.Interval"/>. This uses the same <see cref="T:NodaTime.Instant"/> serializer as the default Instant Serializer.
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.ExtendedIsoIntervalSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.Interval"/>. This uses the same <see cref="T:NodaTime.Instant"/> serializer as the default Instant Serializer.
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.LocalTimeSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.LocalTime"/>, using the ISO-8601 time pattern, extended as required to accommodate milliseconds and ticks.
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.LocalDateSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.LocalDate"/>, using the ISO-8601 date pattern.
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.LocalDateTimeSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.LocalDateTime"/>, using the ISO-8601 date/time pattern, extended as required to accommodate milliseconds and ticks.
+            No time zone designator is applied.
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.OffsetDateTimeSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.OffsetDateTime"/>.
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.InstantSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.Instant"/>, using the ISO-8601 date/time pattern, extended as required to accommodate milliseconds and ticks, and
+            specifying 'Z' at the end to show it's effectively in UTC.
+            </summary>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.CreateZonedDateTimeSerializer(NodaTime.IDateTimeZoneProvider,System.String)">
+            <summary>
+            Creates a serializer for zoned date/times, using the given <see cref="T:NodaTime.IDateTimeZoneProvider"/>.
+            </summary>
+            <param name="provider">The <see cref="T:NodaTime.IDateTimeZoneProvider"/> to use when parsing.</param>
+            <param name="pattern">The text pattern for parsing.</param>
+            <returns>A serializer to handle <see cref="T:NodaTime.ZonedDateTime"/>.</returns>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.RoundtripPeriodSerializer">
+            <summary>
+            Round-tripping converter for <see cref="T:NodaTime.Period"/>. Use this when you really want to preserve information,
+            and don't need interoperability with systems expecting ISO.
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.NormalizingIsoPeriodSerializer">
+            <summary>
+            Normalizing ISO converter for <see cref="T:NodaTime.Period"/>. Use this when you want compatibility with systems expecting
+            ISO durations (~= Noda Time periods). However, note that Noda Time can have negative periods. Note that
+            this converter losses information - after serialization and deserialization, "90 minutes" will become "an hour and 30 minutes".
+            </summary>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.DurationSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.Duration"/>.
+            </summary>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.CreateDateTimeZoneSerializer(NodaTime.IDateTimeZoneProvider)">
+            <summary>
+            Creates a serializer for time zones, using the given <see cref="T:NodaTime.IDateTimeZoneProvider"/>.
+            </summary>
+            <param name="provider">The <see cref="T:NodaTime.IDateTimeZoneProvider"/> to use when parsing.</param>
+            <returns>A serializer to handle <see cref="T:NodaTime.DateTimeZone"/>.</returns>
+        </member>
+        <member name="F:NodaTime.Serialization.ServiceStackText.NodaSerializerDefinitions.OffsetSerializer">
+            <summary>
+            Converter for <see cref="T:NodaTime.Offset"/>.
+            </summary>
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.ServiceStackFallbackDeserializers">
+            <summary>
+            Standard ServiceStack.Text JSON fallback deserializers for NodaTime. These are used by 
+            <see cref="T:NodaTime.Serialization.ServiceStackText.StandardServiceStackSerializer`1"/> to make deserialization more resilient and forgiving to misbehaving consumers.
+            </summary>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ServiceStackFallbackDeserializers.ToInstant(System.String)">
+            <summary>
+            Attempts to generate a <see cref="T:NodaTime.Instant"/> by deserializing to a <see cref="T:System.DateTimeOffset"/> first.
+            </summary>
+            <param name="text">The JSON to deserialize.</param>
+            <returns>The deserialized <see cref="T:NodaTime.Instant"/></returns>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">Failed to deserialize to a <see cref="T:NodaTime.Instant"/></exception>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ServiceStackFallbackDeserializers.ToLocalTime(System.String)">
+            <summary>
+            Attempts to generate a <see cref="T:NodaTime.LocalTime"/> by deserializing to a <see cref="T:System.DateTime"/> first.
+            </summary>
+            <param name="text">The JSON to deserialize.</param>
+            <returns>The deserialized <see cref="T:NodaTime.LocalTime"/></returns>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">Failed to deserialize to a <see cref="T:NodaTime.LocalTime"/></exception>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ServiceStackFallbackDeserializers.ToLocalDate(System.String)">
+            <summary>
+            Attempts to generate a <see cref="T:NodaTime.OffsetDateTime"/> by deserializing to a <see cref="T:System.DateTimeOffset"/> first.
+            </summary>
+            <param name="text">The JSON to deserialize.</param>
+            <returns>The deserialized <see cref="T:NodaTime.OffsetDateTime"/></returns>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">Failed to deserialize to a <see cref="T:NodaTime.OffsetDateTime"/></exception>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ServiceStackFallbackDeserializers.ToLocalDateTime(System.String)">
+            <summary>
+            Attempts to generate a <see cref="T:NodaTime.LocalDateTime"/> by deserializing to a <see cref="T:System.DateTimeOffset"/> first.
+            </summary>
+            <param name="text">The JSON to deserialize.</param>
+            <returns>The deserialized <see cref="T:NodaTime.LocalDateTime"/></returns>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">Failed to deserialize to a <see cref="T:NodaTime.LocalDateTime"/></exception>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ServiceStackFallbackDeserializers.ToOffsetDateTime(System.String)">
+            <summary>
+            Attempts to generate a <see cref="T:NodaTime.OffsetDateTime"/> by deserializing to a <see cref="T:System.DateTimeOffset"/> first.
+            </summary>
+            <param name="text">The JSON to deserialize.</param>
+            <returns>The deserialized <see cref="T:NodaTime.OffsetDateTime"/></returns>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">Failed to deserialize to a <see cref="T:NodaTime.OffsetDateTime"/></exception>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.ServiceStackFallbackDeserializers.ToZonedDateTime(System.String)">
+            <summary>
+            Attempts to generate a <see cref="T:NodaTime.ZonedDateTime"/> by deserializing to a <see cref="T:System.DateTimeOffset"/> first.
+            </summary>
+            <param name="text">The JSON to deserialize.</param>
+            <returns>The deserialized <see cref="T:NodaTime.ZonedDateTime"/></returns>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">Failed to deserialize to a <see cref="T:NodaTime.ZonedDateTime"/></exception>
+        </member>
+        <member name="T:NodaTime.Serialization.ServiceStackText.StandardServiceStackSerializer`1">
+            <summary>
+            A JSON serializer for types which can be represented by a single string value, parsed or formatted
+            from an <see cref="T:NodaTime.Text.IPattern`1"/>.
+            </summary>
+            <typeparam name="T">The type to convert to/from JSON.</typeparam>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.StandardServiceStackSerializer`1.#ctor(NodaTime.Text.IPattern{`0},System.Func{System.String,`0},System.Action{`0})">
+            <summary>
+            Creates a new instance with a pattern and an optional validator and/or fallback deserializer. 
+            The validator will be called before each value is written, and may throw an exception to indicate 
+            that the value cannot be serialized. The fallback serializer will be called when parsing using the 
+            pattern fails.
+            </summary>
+            <param name="pattern">The pattern to use for parsing and formatting.</param>
+            <param name="serviceStackFallbackDeSerializer"></param>
+            <param name="serializationValidator">The validator to call before writing values. May be null, indicating that no validation is required.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="pattern"/> is null.</exception>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.StandardServiceStackSerializer`1.Serialize(`0)">
+            <summary>
+            Serializes the given object.
+            </summary>
+            <param name="value">The object to serialize.</param>
+            <returns>The serialized representation.</returns>
+        </member>
+        <member name="M:NodaTime.Serialization.ServiceStackText.StandardServiceStackSerializer`1.Deserialize(System.String)">
+            <summary>
+            Deserializes the given JSON.
+            </summary>
+            <param name="text">The JSON to parse.</param>
+            <returns>The deserialized object.</returns>
+        </member>
+        <member name="P:NodaTime.Serialization.ServiceStackText.StandardServiceStackSerializer`1.UseRawSerializer">
+            <summary>
+            <see cref="T:NodaTime.Serialization.ServiceStackText.StandardServiceStackSerializer`1"/> does not use the ServiceStack.Text raw serializer.
+            </summary>
+        </member>
+    </members>
+</doc>
