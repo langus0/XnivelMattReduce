@@ -1,5 +1,5 @@
-workdir/*
-worker/Worker/packages/*
-**/bin/*
+workdir/
+worker/Worker/packages/
+**/bin/
 *.userprefs
 *~
