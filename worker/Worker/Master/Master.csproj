@@ -63,6 +63,8 @@
     <Compile Include="MasterHost.cs" />
     <Compile Include="DFS\DfsMasterService.cs" />
     <Compile Include="DFS\utils\DfsUtils.cs" />
+    <Compile Include="MapReduce\MapReduceMasterService.cs" />
+    <Compile Include="MapReduce\MapReduceUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -75,6 +77,7 @@
   <ItemGroup>
     <Folder Include="DFS\" />
     <Folder Include="DFS\utils\" />
+    <Folder Include="MapReduce\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

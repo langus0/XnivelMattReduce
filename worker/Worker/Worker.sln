@@ -39,6 +39,6 @@ Global
 		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ApiMaperReducer\ApiMaperReducer.csproj
+		StartupItem = Master\Master.csproj
 	EndGlobalSection
 EndGlobal

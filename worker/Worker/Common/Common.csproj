@@ -66,6 +66,9 @@
     <Compile Include="DFS\master\SaveFile.cs" />
     <Compile Include="Hash\HashUtils.cs" />
     <Compile Include="Reducer\SendData.cs" />
+    <Compile Include="DFS\master\RunMR.cs" />
+    <Compile Include="DFS\worker\RunMRTask.cs" />
+    <Compile Include="DFS\dto\TaskAssigment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
