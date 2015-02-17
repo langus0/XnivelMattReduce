@@ -64,6 +64,7 @@ namespace Worker
 			//wyslij koniec;
 			var methodEndWork = t.GetMethod("endWork");
 			methodEndWork.Invoke (propperMapper,null);
+			Status = StatusType.WAITING_FOR_REDUCE;
 		}
 
 		public static void startWork(){

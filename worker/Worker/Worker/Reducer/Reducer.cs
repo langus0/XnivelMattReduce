@@ -1,6 +1,7 @@
-	using System;
+using System;
 using ServiceStack;
 using System.IO;
+using Common;
 
 
 namespace Worker
@@ -11,7 +12,7 @@ namespace Worker
 		public object Put (SendMappedData request)
 		{
 			if (ReducerUtils.correctid (request.chunk + request.key, request.id)) {
-				File.AppendAllText(request.key+".txt", request.value + Environment.NewLine);
+				System.IO.File.AppendAllText(request.key+".txt", request.value + Environment.NewLine);
 			}
 			return true;
 		}
@@ -19,6 +20,8 @@ namespace Worker
 		{
 			ReducerUtils.newEndMapper (request.chunk);
 			if (ReducerUtils.recivedFromAllEndMapper (StatusConfigContainer.numberOfNodes)) {
+				StatusConfigContainer.Status = StatusType.WAITING_FOR_REDUCE;
+
 				//dzialaj
 			}
 			/*
