@@ -1,22 +1,25 @@
 using System;
 using ServiceStack;
 
-
 namespace Worker
 {
 	[Route("/reducer/sendData", "PUT")]
-	public class SendMappedData:IReturn<SendMappedData> {
+	public class SendMappedData:IReturn<SendMappedData>
+	{
 		public string chunk {
 			get;
 			set;
 		}
 
-		public int id { get; set;}
-		public string key { get; set;}
-		public string value{ get; set;}
+		public int id { get; set; }
+
+		public string key { get; set; }
+
+		public string value{ get; set; }
 	}
 
-	public class SendMappedDataResponse{
+	public class SendMappedDataResponse
+	{
 
 	}
 }
