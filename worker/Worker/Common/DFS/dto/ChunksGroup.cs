@@ -8,12 +8,14 @@ namespace Common
 		public string fileName{ get; set; }
 		public int chunkId{ get; set; }
 		public long sizeInBytes{ get; set; }
-		public HashSet<String> storedInWorkers = new HashSet<string> ();
+		public HashSet<String> storedInWorkers { get; set; }
 
 		public ChunksGroup (ChunkHeader header, string worker)
 		{
 			fileName = header.fileName;
 			chunkId = header.chunkId;
+			sizeInBytes = header.sizeInBytes;
+			storedInWorkers = new HashSet<string> ();
 			storedInWorkers.Add (worker);
 		}
 

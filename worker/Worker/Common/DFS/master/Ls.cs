@@ -5,6 +5,7 @@ using Common;
 
 namespace Master
 {
+	//[Authenticate]
 	[Route("/dfs/ls")]
 	public class Ls : IReturn<LsResponse>
 	{

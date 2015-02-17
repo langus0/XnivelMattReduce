@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiMaperReducer", "ApiMaper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleMapper", "ExampleMapper\ExampleMapper.csproj", "{0F1C170E-91C5-4FBE-826F-95AAC94CF676}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMTool", "XMTool\XMTool.csproj", "{8232ADB4-B25A-401D-9E42-E1EC8B89CC19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -33,12 +35,16 @@ Global
 		{30BAB100-EE03-49CD-AEB8-E05FCFAE8E57}.Debug|x86.Build.0 = Debug|x86
 		{30BAB100-EE03-49CD-AEB8-E05FCFAE8E57}.Release|x86.ActiveCfg = Release|x86
 		{30BAB100-EE03-49CD-AEB8-E05FCFAE8E57}.Release|x86.Build.0 = Release|x86
+		{8232ADB4-B25A-401D-9E42-E1EC8B89CC19}.Debug|x86.ActiveCfg = Debug|x86
+		{8232ADB4-B25A-401D-9E42-E1EC8B89CC19}.Debug|x86.Build.0 = Debug|x86
+		{8232ADB4-B25A-401D-9E42-E1EC8B89CC19}.Release|x86.ActiveCfg = Release|x86
+		{8232ADB4-B25A-401D-9E42-E1EC8B89CC19}.Release|x86.Build.0 = Release|x86
 		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Debug|x86.Build.0 = Debug|Any CPU
 		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Release|x86.ActiveCfg = Release|Any CPU
 		{9E31C03B-47CC-486F-BE6B-533982B8311A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Worker\Worker.csproj
+		StartupItem = Master\Master.csproj
 	EndGlobalSection
 EndGlobal

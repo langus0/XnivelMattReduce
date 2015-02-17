@@ -2,6 +2,8 @@ using System;
 using ServiceStack;
 using ServiceStack.Text;
 using Funq;
+using ServiceStack.Auth;
+using ServiceStack.Caching;
 using ServiceStack.Logging;
 using ServiceStack.Logging.NLogger;
 
@@ -39,8 +41,17 @@ namespace Master
 				return DtoUtils.CreateErrorResponse (request, exception);
 			});
 
+			/*
+			Plugins.Add (new AuthFeature (() => new AuthUserSession (),
+			                              new IAuthProvider[] {new BasicAuthProvider ()})
+			             );
+			Plugins.Add (new RegistrationFeature ());
+			//Plugins.Add(new RequestLogsFeature());
 
-
+			container.Register<ICacheClient>(new MemoryCacheClient());
+			var userRep = new InMemoryAuthRepository();
+			container.Register<IUserAuthRepository>(userRep);
+			*/
 			var config = new HostConfig ();
 			config.DebugMode = true; //Show StackTraces in service responses during development
 			config.WriteErrorsToResponse = true;

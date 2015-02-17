@@ -9,7 +9,7 @@ namespace Common
 	{
 		public String fileName{ get; set; }
 
-		private HashSet<ChunksGroup> chunks{ get; set; }
+		public HashSet<ChunksGroup> chunks{ get; set; }
 
 		public int accessibleReplicas{ get {
 				return 	(from chunk in chunks 

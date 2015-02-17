@@ -43,8 +43,6 @@ namespace Worker
 			methodSetIP.Invoke (propperMapper,new object[]{listOfNodes});
 
 
-
-
 			foreach (int chunk in chunksToProcess) {
 				string line;
 				String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk.ToString() + DfsUtils.CHUNKID_SEPARATOR + fileNameIn);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
 using ServiceStack;
 using ServiceStack.Logging;
 using Common;
@@ -19,15 +20,25 @@ namespace Master
 			log.Info ("Listing DFS...");
 			Dictionary<string,FileHeader> files = new Dictionary<string,FileHeader> ();
 			List<string> workersWithErrors = new List <string> ();
-			foreach (var worker in WorkersUtil.listOfWorkers) {
+			List<Task<Worker.LsResponse>> responses = new List<Task<Worker.LsResponse>> ();
+			var workersList = WorkersUtil.listOfWorkers;
+
+			foreach (var worker in workersList) {
 				var client = new JsonServiceClient (worker);
+				log.DebugFormat ("List request to {0}", worker);
+				responses.Add (client.GetAsync (new Worker.Ls ()));
+			}
+
+			for (int i = 0; i < workersList.Count; i++) {
+				var worker = workersList [i];
 				Worker.LsResponse response = null;
 				try {
-					log.InfoFormat ("List request to {0}", worker);
-					response = client.Get (new Worker.Ls ());
+					log.DebugFormat ("Waiting for list response from {0}", worker);
+					response = responses [i].Result;
 				} catch (Exception e) {
 					log.Error (e);
 				}
+
 				if (response == null || response.IsErrorResponse ()) {
 					workersWithErrors.Add (worker);
 					continue;
@@ -67,7 +78,7 @@ namespace Master
 					var client = new JsonServiceClient (worker);
 					Worker.GetChunkResponse response = null;
 					try {
-						log.Info ("Getting chunk {1}-{0} from {2}".FormatWith (chunk.chunkId, fileName, worker));
+						log.DebugFormat ("Getting chunk {1}-{0} from {2}", chunk.chunkId, fileName, worker);
 						response = client.Get (new Worker.GetChunk { chunkId = chunk.chunkId, FileName = fileName });
 					} catch (Exception e) {
 						log.Warn (e);
@@ -130,7 +141,6 @@ namespace Master
 
 					var request = new Worker.SaveChunk ();
 					request.chunk = chunk;
-					log.Debug (request.ToJsv ());
 					worker.Put (request);
 
 				}
@@ -158,8 +168,6 @@ namespace Master
 			return chunks;
 		
 		}
-
-
 	}
 }
 
