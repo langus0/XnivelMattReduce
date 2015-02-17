@@ -7,7 +7,7 @@ namespace Worker
 {
 	public class MapReduceUtils
 	{
-		const string USERDLL_NAME = "MapReduce.dll";
+		public const string USERDLL_NAME = "MapReduce.dll";
 		private static ILog log = LogManager.GetLogger (typeof(MapReduceUtils));
 
 		public static string  GetWorkingDirectory ()

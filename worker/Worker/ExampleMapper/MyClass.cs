@@ -4,11 +4,13 @@ namespace ExampleMapper
 {
 	public class Mapper : ApiMaperReducer.ApiMapper
 	{
-		public void Run() 
+		public void Run(string line) 
 		{
-			string key="1", value="2";
-			//robcos w while a wynik:
-			send (key, value);
+			string[] words = line.Split(' ');
+			foreach (string word in words)
+			{
+				send (word, word);
+			}
 		}
 	}
 }

@@ -31,7 +31,11 @@ namespace Worker
 			recivedEndList [chunk]++;
 			return false;
 		}
-		public static bool recivedAllEndMapper(string chunk,int numberOfNodes)
+		public static bool recivedFromAllEndMapper(int numberOfNodes)
+		{
+			return keyList.Count==numberOfNodes;
+		}
+		public static bool recivedAllFromOneEndMapper(string chunk,int numberOfNodes)
 		{
 			return recivedEndList [chunk] == numberOfNodes;
 		}
