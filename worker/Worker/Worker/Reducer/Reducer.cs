@@ -17,13 +17,18 @@ namespace Worker
 		}
 		public object Put (SendMapperEndWork request)
 		{
+			ReducerUtils.newEndMapper (request.chunk);
+			if (ReducerUtils.recivedFromAllEndMapper (StatusConfigContainer.numberOfNodes)) {
+				//dzialaj
+			}
+			/*
 			if (ReducerUtils.newEndMapper (request.chunk)) {
 				//sendtoall
 			} else {
-				if (ReducerUtils.recivedAllEndMapper (request.chunk, 1)) {
+				if (ReducerUtils.recivedAllFromOneEndMapper (request.chunk, 1)) {
 					//wywal z listy zadan tego mapera i jesli jakis watek na nim dziala to go zabij
 				}
-			}
+			}*/
 			return true;
 		}
 	}

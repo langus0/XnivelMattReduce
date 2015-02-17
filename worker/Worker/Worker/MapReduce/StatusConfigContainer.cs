@@ -20,6 +20,23 @@ namespace Worker
 
 		public static List<int> chunksToProcess { get ; set; }
 
+		public static int numberOfNodes { get ; set; }
+		public static List<int> listOfNodes { get ; set; }
+
+		public static void createlistOfNodes(List<TaskAssigment> assigments)
+		{
+			listOfNodes=(from assigment in assigments
+			 select assigment.workerIP).ToList ();
+		}
+
+		public static void countNumberOfNodes(List<TaskAssigment> assigments)
+		{
+			numberOfNodes = (from assigment in assigments
+			                   group assigment by assigment.workerIP into g
+			                   select  g
+			).Count ();
+		}
+
 		public static string[] reducersIps {
 			get {
 				return (from assigment in assigments
