@@ -5,7 +5,7 @@ using ServiceStack;
 namespace Worker
 {
 	[Route("/reducer/sendData", "PUT")]
-	public class SendMappedData{
+	public class SendMappedData:IReturn<SendMappedData> {
 		public string chunk {
 			get;
 			set;
@@ -14,6 +14,10 @@ namespace Worker
 		public int id { get; set;}
 		public string key { get; set;}
 		public string value{ get; set;}
+	}
+
+	public class SendMappedDataResponse{
+
 	}
 }
 
