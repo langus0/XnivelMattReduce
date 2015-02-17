@@ -117,7 +117,7 @@ namespace Master
 		public static void saveFileInDfs (Common.File file, int numOfReplcas)
 		{
 			var chunks = splitFileIntoChunks (file);
-			var workers = getClientsToActiveWorkers ();
+			var workers = WorkersUtil.getClientsToActiveWorkers ();
 			if (workers.Count < numOfReplcas) {
 				throw new ArgumentException ("You can not create more replicas than workers!");
 			}
@@ -134,9 +134,6 @@ namespace Master
 					worker.Put (request);
 
 				}
-			}
-			foreach (var chunk in workers) {
-				chunk.Dispose ();
 			}
 		}
 
@@ -157,16 +154,7 @@ namespace Master
 		
 		}
 
-		private static List<JsonServiceClient> getClientsToActiveWorkers ()
-		{
-			var lsResult = listFiles ();
-			var listOfWorkers = WorkersUtil.listOfWorkers.Except (lsResult.Item2).ToList ();
-			return (from worker in listOfWorkers
-				select new JsonServiceClient (worker)).ToList ();
-			//for (int i = 0;; i++) {
-			//	yield return listOfWorkers [i % listOfWorkers.Count];
-			//}
-		}
+
 	}
 }
 

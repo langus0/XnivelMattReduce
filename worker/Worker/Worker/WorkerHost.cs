@@ -17,11 +17,7 @@ namespace Worker
 		{
 		}
 
-		
-		public override ServiceStackHost Start (string urlBase)
-		{
-			return base.Start (urlBase);
-		}
+
 		public override void Configure (Container container)
 		{
 
