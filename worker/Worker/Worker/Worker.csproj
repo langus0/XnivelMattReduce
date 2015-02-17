@@ -72,6 +72,8 @@
     <Compile Include="General\utils\SystemLoadChecker.cs" />
     <Compile Include="DFS\utils\DfsWorkerUtils.cs" />
     <Compile Include="DFS\DfsWorkerService.cs" />
+    <Compile Include="Reducer\Reducer.cs" />
+    <Compile Include="Reducer\utils\ReducerUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -88,6 +90,8 @@
     <Folder Include="DFS\utils\" />
     <Folder Include="General\" />
     <Folder Include="General\utils\" />
+    <Folder Include="Reducer\" />
+    <Folder Include="Reducer\utils\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

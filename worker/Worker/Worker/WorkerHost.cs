@@ -13,7 +13,7 @@ namespace Worker
 	public class WorkerHost : AppHostHttpListenerBase
 	{
 
-		public WorkerHost () : base("XnivelMattReduce Worker", typeof(DfsWorkerService).Assembly)
+		public WorkerHost () : base("XnivelMattReduce Worker",new[] {  typeof(DfsWorkerService).Assembly,typeof(Reducer).Assembly})
 		{
 		}
 

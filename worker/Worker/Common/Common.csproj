@@ -65,7 +65,8 @@
     <Compile Include="DFS\worker\DeleteChunk.cs" />
     <Compile Include="DFS\master\SaveFile.cs" />
     <Compile Include="Hash\HashUtils.cs" />
-    <Compile Include="Reducer\SendData.cs" />
+    <Compile Include="Reducer\SendMappedData.cs" />
+    <Compile Include="Reducer\SendMapperEndWork.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
