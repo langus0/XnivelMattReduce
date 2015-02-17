@@ -2,15 +2,18 @@ using System;
 using System.Linq;
 using Common;
 using System.Collections.Generic;
+using ServiceStack.Logging;
 
 namespace Worker
 {
 	public static class StatusConfigContainer
 	{
 
+		private static ILog log = LogManager.GetLogger (typeof(StatusConfigContainer));
+
 		public static Common.StatusType Status{ get; set; }
 
-		public static string myIP{ get; set; }
+		public static string myIP{ get ; set; }
 
 		public static List<TaskAssigment> assigments;
 
@@ -57,7 +60,7 @@ namespace Worker
 
 		public static void init (string ip)
 		{
-			myIP = ip;
+			myIP = MRUtil.normalizeIP (ip);
 			reset ();
 		}
 
@@ -74,6 +77,7 @@ namespace Worker
 			StatusConfigContainer.fileNameIn = fileNameIn;
 			StatusConfigContainer.fileNameOut = fileNameOut;
 			StatusConfigContainer.assigments = assigments;
+
 			chunksToProcess = (from assigment in assigments
 			                 where assigment.workerIP == myIP
 			                 select assigment.listOfChunksToProcess).First ();
