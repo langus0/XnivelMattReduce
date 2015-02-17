@@ -11,7 +11,7 @@ namespace Master
 	{
 		private static ILog log = LogManager.GetLogger (typeof(MapReduceUtils));
 
-		public static string runMRJob (RunMR runMRRequest, List<TaskAssigment> assigments)
+		public static void runMRJob (RunMR runMRRequest, List<TaskAssigment> assigments)
 		{
 			foreach (var assigment in assigments) {
 				Worker.RunMRTask request = new Worker.RunMRTask {

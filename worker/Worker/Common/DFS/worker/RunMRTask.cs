@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using ServiceStack;
-
+using Common;
 namespace Worker
 {
 	[Route("/MR/runTask")]
-	public class RunMRTask:IReturn<RunMRResponse>{
+	public class RunMRTask:IReturn<RunMRTaskResponse>{
 		public byte[] fileWithDll{ get; set; }
 		public string fileNameIn{get;set;}
 		public string fileNameOut{get;set;}

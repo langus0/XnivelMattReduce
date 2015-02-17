@@ -74,6 +74,7 @@
     <Compile Include="DFS\DfsWorkerService.cs" />
     <Compile Include="Reducer\Reducer.cs" />
     <Compile Include="Reducer\utils\ReducerUtils.cs" />
+    <Compile Include="MapReduce\MapReduceWokrerService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -92,6 +93,7 @@
     <Folder Include="General\utils\" />
     <Folder Include="Reducer\" />
     <Folder Include="Reducer\utils\" />
+    <Folder Include="MapReduce\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
