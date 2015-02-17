@@ -11,7 +11,7 @@ namespace Worker
 		public object Put (SendMappedData request)
 		{
 			if (ReducerUtils.correctid (request.chunk + request.key, request.id)) {
-				File.AppendAllText(request.key, request.value + Environment.NewLine);
+				File.AppendAllText(request.key+".txt", request.value + Environment.NewLine);
 			}
 			return true;
 		}

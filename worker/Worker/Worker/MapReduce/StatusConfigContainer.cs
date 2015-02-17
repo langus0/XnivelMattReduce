@@ -27,7 +27,7 @@ namespace Worker
 		public static List<int> chunksToProcess { get ; set; }
 
 		public static int numberOfNodes { get ; set; }
-		public static List<int> listOfNodes { get ; set; }
+		public static List<string> listOfNodes { get ; set; }
 
 		public static Thread Tmapper;
 
@@ -40,22 +40,22 @@ namespace Worker
 
 			var propperMapper = Activator.CreateInstance(t);
 			var methodSetIP = t.GetMethod("setListOfNodes");
-			methodSetIP.Invoke (propperMapper,listOfNodes);
+			methodSetIP.Invoke (propperMapper,new object[]{listOfNodes});
 
 
 
 
 			foreach (int chunk in chunksToProcess) {
 				string line;
-				String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk);
+				String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk.ToString() + DfsUtils.CHUNKID_SEPARATOR + fileNameIn);
 
 				// Read the file and display it line by line.
 				System.IO.StreamReader file = 
 					new System.IO.StreamReader(filePath);
 				while((line = file.ReadLine()) != null)
 				{
-					var methodRun = t.GetMethod("run",line);
-					methodRun.Invoke (propperMapper);
+					var methodRun = t.GetMethod("run");
+					methodRun.Invoke (propperMapper,new object[]{line});
 				}
 
 				file.Close();
@@ -63,7 +63,7 @@ namespace Worker
 			}
 			//wyslij koniec;
 			var methodEndWork = t.GetMethod("endWork");
-			methodEndWork.Invoke (propperMapper);
+			methodEndWork.Invoke (propperMapper,null);
 		}
 
 		public static void startWork(){
