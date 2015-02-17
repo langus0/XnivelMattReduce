@@ -14,16 +14,26 @@ namespace Master
 		public static void runMRJob (RunMR runMRRequest, List<TaskAssigment> assigments)
 		{
 			foreach (var assigment in assigments) {
-				Worker.RunMRTask request = new Worker.RunMRTask {
+				Worker.PrepareMRTask request = new Worker.PrepareMRTask {
 					fileNameIn = runMRRequest.fileNameIn,
 					fileNameOut = runMRRequest.fileNameOut,
 					fileWithDll = runMRRequest.fileWithDll,
 					taskAssigments = assigments
 				};
 				var client = new JsonServiceClient (assigment.workerIP);
-				Worker.RunMRTaskResponse response = null;
-				log.InfoFormat ("Sending task to {0}", assigment.workerIP);
-				response = client.Put (request);
+				Worker.PrepareMRTaskResponse response = null;
+				try {
+					log.InfoFormat ("Sending task to {0}", assigment.workerIP);
+					response = client.Put (request);
+				} catch (Exception e) {
+					log.Error (e);
+					throw new Exception ("Error during sending tasks to workers!");
+				}
+			}
+			foreach (var assigment in assigments) {
+				var client = new JsonServiceClient (assigment.workerIP);
+				log.InfoFormat ("Running task on {0}", assigment.workerIP);
+				client.Put (new Worker.RunMRTask ());
 			}
 		}
 

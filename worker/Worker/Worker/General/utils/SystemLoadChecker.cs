@@ -6,7 +6,7 @@ namespace Worker
 
 	//TEN KOD NIE DZIAŁA!!!!!!!!!!!!! ;(
 	public class SystemLoadChecker
-	{
+	{   
 		PerformanceCounter cpuCounter;
 		PerformanceCounter ramCounter;
 		PerformanceCounter myCpuCounter;

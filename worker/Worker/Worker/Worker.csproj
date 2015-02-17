@@ -68,13 +68,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkerHost.cs" />
     <Compile Include="General\GeneralService.cs" />
-    <Compile Include="General\GetStatus.cs" />
     <Compile Include="General\utils\SystemLoadChecker.cs" />
     <Compile Include="DFS\utils\DfsWorkerUtils.cs" />
     <Compile Include="DFS\DfsWorkerService.cs" />
     <Compile Include="Reducer\Reducer.cs" />
     <Compile Include="Reducer\utils\ReducerUtils.cs" />
     <Compile Include="MapReduce\MapReduceWokrerService.cs" />
+    <Compile Include="MapReduce\MapReduceUtils.cs" />
+    <Compile Include="MapReduce\StatusConfigContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

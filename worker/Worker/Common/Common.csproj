@@ -67,9 +67,12 @@
     <Compile Include="Hash\HashUtils.cs" />
     <Compile Include="Reducer\SendMappedData.cs" />
     <Compile Include="Reducer\SendMapperEndWork.cs" />
-    <Compile Include="DFS\master\RunMR.cs" />
-    <Compile Include="DFS\worker\RunMRTask.cs" />
-    <Compile Include="DFS\dto\TaskAssigment.cs" />
+    <Compile Include="DFS\worker\GetStatus.cs" />
+    <Compile Include="MapReduce\master\RunMR.cs" />
+    <Compile Include="MapReduce\dto\TaskAssigment.cs" />
+    <Compile Include="MapReduce\worker\RunMRTask.cs" />
+    <Compile Include="MapReduce\worker\PrepareMRTask.cs" />
+    <Compile Include="MapReduce\dto\StatusType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -80,5 +83,9 @@
     <Folder Include="DFS\utils\" />
     <Folder Include="Hash\" />
     <Folder Include="Reducer\" />
+    <Folder Include="MapReduce\" />
+    <Folder Include="MapReduce\master\" />
+    <Folder Include="MapReduce\dto\" />
+    <Folder Include="MapReduce\worker\" />
   </ItemGroup>
 </Project>
