@@ -141,6 +141,11 @@ namespace Master
 		{
 			List<Chunk> chunks = new List<Chunk> ();
 			var fileContent = file.data;
+
+			if (fileContent.Count < file.chunksCount) {
+				throw new ArgumentException ("You can not create more chunks than elements!");
+			}
+
 			int sizeOfChunk = fileContent.Count / file.chunksCount;
 			int howManyChunks = Convert.ToInt32 (Math.Ceiling (fileContent.Count / (double)sizeOfChunk));
 

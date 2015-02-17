@@ -89,7 +89,7 @@ namespace Master
 			Dictionary<string,TaskAssigment> assigments = new Dictionary<string,TaskAssigment> (workers.Count);
 			foreach (var worker in workers) {
 				assigments [worker] = new TaskAssigment {
-					workerIP = worker,
+					workerIP = Common.MRUtil.normalizeIP(worker),
 					workerId = assigments.Count,
 					listOfChunksToProcess = new List<int> ()
 				};

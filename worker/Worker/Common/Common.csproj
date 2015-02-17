@@ -67,12 +67,13 @@
     <Compile Include="Hash\HashUtils.cs" />
     <Compile Include="Reducer\SendMappedData.cs" />
     <Compile Include="Reducer\SendMapperEndWork.cs" />
-    <Compile Include="DFS\worker\GetStatus.cs" />
     <Compile Include="MapReduce\master\RunMR.cs" />
     <Compile Include="MapReduce\dto\TaskAssigment.cs" />
     <Compile Include="MapReduce\worker\RunMRTask.cs" />
     <Compile Include="MapReduce\worker\PrepareMRTask.cs" />
     <Compile Include="MapReduce\dto\StatusType.cs" />
+    <Compile Include="MapReduce\worker\GetStatus.cs" />
+    <Compile Include="MapReduce\MRUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
