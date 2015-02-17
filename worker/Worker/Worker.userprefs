@@ -1,42 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Worker/Reducer/Reducer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Worker/MapReduce/StatusConfigContainer.cs">
     <Files>
-      <File FileName="Worker/Reducer/Reducer.cs" Line="28" Column="4" />
-      <File FileName="Worker/DFS/DfsWorkerService.cs" Line="31" Column="19" />
-      <File FileName="Worker/DFS/utils/DfsWorkerUtils.cs" Line="46" Column="4" />
-      <File FileName="Worker/Reducer/utils/ReducerUtils.cs" Line="25" Column="48" />
-      <File FileName="ApiMaperReducer/ApiMapper.cs" Line="1" Column="1" />
-      <File FileName="ApiMaperReducer/ApiGlobal.cs" Line="1" Column="1" />
-      <File FileName="Common/Reducer/SendMappedData.cs" Line="8" Column="29" />
-      <File FileName="Common/DFS/dto/ChunkHeader.cs" Line="1" Column="1" />
-      <File FileName="Common/DFS/master/GetFile.cs" Line="1" Column="1" />
-      <File FileName="Common/DFS/utils/DfsUtils.cs" Line="1" Column="1" />
-      <File FileName="Common/DFS/worker/DeleteChunk.cs" Line="1" Column="1" />
-      <File FileName="Common/Reducer/SendMapperEndWork.cs" Line="1" Column="1" />
-      <File FileName="Worker/WorkerHost.cs" Line="1" Column="1" />
+      <File FileName="Worker/MapReduce/StatusConfigContainer.cs" Line="53" Column="8" />
+      <File FileName="Master/MapReduce/MapReduceMasterService.cs" Line="14" Column="24" />
+      <File FileName="Master/MapReduce/MapReduceUtils.cs" Line="41" Column="4" />
       <File FileName="Worker/Program.cs" Line="17" Column="4" />
-      <File FileName="Worker/app.config" Line="1" Column="1" />
-      <File FileName="Worker/NLog.config" Line="1" Column="1" />
-      <File FileName="Worker/packages.config" Line="1" Column="1" />
-      <File FileName="Master/MapReduce/MapReduceUtils.cs" Line="17" Column="16" />
-      <File FileName="Master/MapReduce/MapReduceMasterService.cs" Line="14" Column="21" />
-      <File FileName="Worker/General/GeneralService.cs" Line="10" Column="57" />
-      <File FileName="Worker/General/GetStatus.cs" Line="1" Column="1" />
-      <File FileName="Common/DFS/worker/RunMRTask.cs" Line="12" Column="28" />
+      <File FileName="Worker/WorkerHost.cs" Line="47" Column="23" />
+      <File FileName="Worker/Reducer/Reducer.cs" Line="33" Column="4" />
+      <File FileName="Worker/MapReduce/MapReduceUtils.cs" Line="35" Column="4" />
+      <File FileName="Worker/MapReduce/MapReduceWokrerService.cs" Line="12" Column="23" />
+      <File FileName="Worker/Reducer/utils/ReducerUtils.cs" Line="35" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="ApiMaperReducer" expanded="True" />
-          <Node name="Common" expanded="True" />
-          <Node name="ExampleMapper" expanded="True" />
-          <Node name="Master" expanded="True">
-            <Node name="MapReduce" expanded="True" />
-            <Node name="Properties" expanded="True" />
-          </Node>
-          <Node name="Worker" expanded="True" />
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State />

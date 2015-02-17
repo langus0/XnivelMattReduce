@@ -3,6 +3,9 @@ using System.Linq;
 using Common;
 using System.Collections.Generic;
 using ServiceStack.Logging;
+using System.Threading;
+using System.Reflection;
+using System.IO;
 
 namespace Worker
 {
@@ -25,6 +28,49 @@ namespace Worker
 
 		public static int numberOfNodes { get ; set; }
 		public static List<int> listOfNodes { get ; set; }
+
+		public static Thread Tmapper;
+
+		public static void mapperFunction(){
+			String dllPath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), MapReduceUtils.USERDLL_NAME);
+
+			Assembly assembly = Assembly.LoadFrom(dllPath);
+			AppDomain.CurrentDomain.Load(assembly.GetName());
+			Type t = assembly.GetType("Mapper");
+
+			var propperMapper = Activator.CreateInstance(t);
+			var methodSetIP = t.GetMethod("setListOfNodes");
+			methodSetIP.Invoke (propperMapper,listOfNodes);
+
+
+
+
+			foreach (int chunk in chunksToProcess) {
+				string line;
+				String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk);
+
+				// Read the file and display it line by line.
+				System.IO.StreamReader file = 
+					new System.IO.StreamReader(filePath);
+				while((line = file.ReadLine()) != null)
+				{
+					var methodRun = t.GetMethod("run",line);
+					methodRun.Invoke (propperMapper);
+				}
+
+				file.Close();
+
+			}
+			//wyslij koniec;
+			var methodEndWork = t.GetMethod("endWork");
+			methodEndWork.Invoke (propperMapper);
+		}
+
+		public static void startWork(){
+			Tmapper = new Thread (new ThreadStart (mapperFunction));
+			Tmapper.Start ();
+			Status = StatusType.MAPPER;
+		}
 
 		public static void createlistOfNodes(List<TaskAssigment> assigments)
 		{
