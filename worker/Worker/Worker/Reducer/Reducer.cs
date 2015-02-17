@@ -20,8 +20,6 @@ namespace Worker
 		{
 			ReducerUtils.newEndMapper (request.chunk);
 			if (ReducerUtils.recivedFromAllEndMapper (StatusConfigContainer.numberOfNodes)) {
-				StatusConfigContainer.Status = StatusType.WAITING_FOR_REDUCE;
-
 				//dzialaj
 			}
 			/*
