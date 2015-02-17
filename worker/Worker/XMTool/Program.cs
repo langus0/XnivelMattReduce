@@ -19,6 +19,7 @@ namespace XMTool
 			System.Console.WriteLine (" register - register user\t");
 			System.Console.WriteLine (" rm FILENAME - remove file from DFS");
 			System.Console.WriteLine (" put FILENAME NUM_CHUNKS NUM_REPLICAS - save file to DFS");
+			System.Console.WriteLine (" cat FILENAME - read file from DFS");
 			System.Console.WriteLine (" run FILENAME_DLL FILE_IN FILE_OUT - run MR task");
 		}
 
@@ -111,6 +112,15 @@ namespace XMTool
 			getClient ().Put (request);	
 		}
 
+		public static void cat (string name)
+		{
+			Master.GetFile request = new Master.GetFile { FileName=name };
+			Master.GetFileResponse response =  getClient ().Get (request);	
+			foreach (var line in response.Result.data) {
+				System.Console.WriteLine (line);
+			}
+		}
+
 		public static void Main (string[] args)
 		{
 			if (args.Length < 1) {
@@ -141,6 +151,12 @@ namespace XMTool
 				run (args [1], args [2], args [3]);
 				return;
 			}
+			if (args [0].EqualsIgnoreCase ("cat")) {
+				cat (args [1]);
+				return;
+			}
+			System.Console.WriteLine ("Command not found...");
+			showHelp ();
 		}
 	}
 }
