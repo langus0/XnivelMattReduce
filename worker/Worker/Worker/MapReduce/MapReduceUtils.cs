@@ -5,7 +5,7 @@ using ServiceStack.Logging;
 
 namespace Worker
 {
-	public class MapReduceUtils
+	public static class MapReduceUtils
 	{
 		public const string USERDLL_NAME = "MapReduce.dll";
 		private static ILog log = LogManager.GetLogger (typeof(MapReduceUtils));
@@ -14,6 +14,11 @@ namespace Worker
 		{
 			return Path.Combine (ConfigurationManager.AppSettings ["WorkingDirectory"], "workspace/");
 		}
+
+		public static string pathToDll{ get {
+				return Path.Combine (GetWorkingDirectory (), USERDLL_NAME);
+
+			} }
 
 		public static void  clearWorkingDirectory ()
 		{
@@ -28,13 +33,12 @@ namespace Worker
 
 		public static void saveDll (byte[] data)
 		{
-			String filePath = Path.Combine (GetWorkingDirectory (), USERDLL_NAME);
-			log.InfoFormat ("Saving dll file {0}", filePath);
+			log.InfoFormat ("Saving dll file {0}", pathToDll);
 
-			if (System.IO.File.Exists (filePath)) {
+			if (System.IO.File.Exists (pathToDll)) {
 				throw new ArgumentException ("File already exists!");
 			}
-			System.IO.File.WriteAllBytes (filePath, data);
+			System.IO.File.WriteAllBytes (pathToDll, data);
 		}
 	}
 }

@@ -19,6 +19,11 @@ namespace Common
 			String name = fileName.Substring (fileName.IndexOf (CHUNKID_SEPARATOR) + 1);
 			return Tuple.Create (name, chunkId);
 		}
+
+		public static string joinToFileName (string name, int id)
+		{
+			return id.ToString () + CHUNKID_SEPARATOR + name;
+		}
 	}
 }
 

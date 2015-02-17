@@ -13,7 +13,9 @@ namespace Common
 		[Description("Waiting for reduce")]
 		WAITING_FOR_REDUCE,
 		[Description("Reduce")]
-		REDUCE
+		REDUCE,
+		[Description("End")]
+		END
 	}
 
 	public class DescriptionAttribute : System.Attribute

@@ -1,16 +1,23 @@
 using System;
+using System.Collections.Generic;
 
 namespace ExampleMapper
 {
 	public class Mapper : ApiMaperReducer.ApiMapper
 	{
-		public void Run(string line) 
+		public void Run (string line)
 		{
-			string[] words = line.Split(' ');
-			foreach (string word in words)
-			{
+			string[] words = line.Split (' ');
+			foreach (string word in words) {
 				send (word, word);
 			}
+		}
+	}
+
+	public class Reducer:ApiMaperReducer.ApiReducer
+	{
+		public override void reduce(string key, List<string> values){
+			send (key, values.Count.ToString());
 		}
 	}
 }
