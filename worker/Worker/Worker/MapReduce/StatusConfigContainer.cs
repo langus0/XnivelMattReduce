@@ -34,12 +34,16 @@ namespace Worker
 
 		public static List<int> chunksToProcess { get ; set; }
 
-		public static int numberOfNodes { get ; set; }
-		public static List<string> listOfNodes { get ; set; }
+		public static int totalNumberOfChunks{ get {
+				return (from assigment in assigments
+				        select assigment.listOfChunksToProcess.Count).Sum ();
+			} }
+
 
 		public static Thread Tmapper;
 
-		public static void mapperFunction(){
+		public static void mapperFunction ()
+		{
 			String dllPath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), MapReduceUtils.USERDLL_NAME);
 
 			System.Console.WriteLine ("dllpath "+dllPath);
@@ -99,26 +103,29 @@ namespace Worker
 			Status = StatusType.WAITING_FOR_REDUCE;
 		}
 
-		public static void startWork(){
+		public static void startWork ()
+		{
 			Tmapper = new Thread (new ThreadStart (mapperFunction));
 			Tmapper.Start ();
 			Status = StatusType.MAPPER;
 		}
-
-		public static void createlistOfNodes(List<TaskAssigment> assigments)
+		/*To samo zwraca reducersIPs
+		public static void createlistOfNodes (List<TaskAssigment> assigments)
 		{
-			listOfNodes=(from assigment in assigments
+			listOfNodes = (from assigment in assigments
 			 select assigment.workerIP).ToList ();
 		}
-
-		public static void countNumberOfNodes(List<TaskAssigment> assigments)
+*/
+		/*
+		 * //Assigment jest per worker więc assigmentów jest tyle ile assigmentów!
+		public static void countNumberOfNodes (List<TaskAssigment> assigments)
 		{
+
 			numberOfNodes = (from assigment in assigments
 			                   group assigment by assigment.workerIP into g
 			                   select  g
 			).Count ();
 		}
-
 
 
 		public static int workerId {

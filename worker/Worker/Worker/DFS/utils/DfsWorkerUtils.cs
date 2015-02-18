@@ -39,6 +39,8 @@ namespace Worker
 		public static void writeChunk(Chunk chunk){
 			writeChunk (chunk.fileName, chunk.chunkId, chunk.data);
 		}
+
+
 		public static void writeChunk (String name, int id, List<string> data)
 		{
 			String filePath = Path.Combine (GetWorkingDirectory (), id.ToString () + DfsUtils.CHUNKID_SEPARATOR + name);
@@ -78,6 +80,10 @@ namespace Worker
 				System.IO.Directory.CreateDirectory (path);
 			}
 
+		}
+
+		public static string getPathToChunk(string name, int id){
+			return Path.Combine (GetWorkingDirectory (), DfsUtils.joinToFileName (name, id));
 		}
 	}
 }

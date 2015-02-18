@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.IO;
 using System.Reflection;
+using System.Linq;
 using Common;
 
 namespace Worker
@@ -10,23 +11,33 @@ namespace Worker
 	public class ReducerUtils
 	{
 		private static Dictionary<string, int> keyList = new Dictionary<string, int> ();
-		public static bool correctid(string chunk_and_key,int id)
+		private static Dictionary<string, int> recivedEndList = new Dictionary<string, int> ();
+		private const string MAPER_RESULT_EXTENSION = ".key";
+
+		public static void saveMapResult (SendMappedData request)
 		{
-			if (!keyList.ContainsKey (chunk_and_key)) {
-				keyList.Add (chunk_and_key, 1);
+			if (ReducerUtils.isUnseenId (request.chunk,  request.key, request.id)) {
+				var path = Path.Combine (MapReduceUtils.GetWorkingDirectory (), request.key + MAPER_RESULT_EXTENSION);
+				System.IO.File.AppendAllText (path, request.value + Environment.NewLine);
+			}
+		}
+
+		public static bool isUnseenId (string chunk, string key, int id)
+		{
+			var chunkAndKey = chunk + "#" + key;
+			if (!keyList.ContainsKey (chunkAndKey)) {
+				keyList.Add (chunkAndKey, 1);
 				return true;
 			}
-			if (keyList [chunk_and_key] == id - 1) {
-				keyList [chunk_and_key] = id;
+			if (keyList [chunkAndKey] == id - 1) {
+				keyList [chunkAndKey] = id;
 				return true;
 			} else {
 				return false;
 			}
 		}
 
-
-		private static Dictionary<string, int> recivedEndList = new Dictionary<string, int> ();
-		public static bool newEndMapper(string chunk)
+		public static bool newEndMapper (string chunk)
 		{
 			if (!recivedEndList.ContainsKey (chunk)) {
 				recivedEndList.Add (chunk, 1);
@@ -35,59 +46,46 @@ namespace Worker
 			recivedEndList [chunk]++;
 			return false;
 		}
-		public static bool recivedFromAllEndMapper(int numberOfNodes)
+
+		public static bool recivedFromAllEndMapper ()
 		{
-			return keyList.Count==numberOfNodes;
+			return keyList.Count == StatusConfigContainer.totalNumberOfChunks;
 		}
-		public static bool recivedAllFromOneEndMapper(string chunk,int numberOfNodes)
+
+		public static bool recivedAllFromOneEndMapper (string chunk, int numberOfNodes)
 		{
 			return recivedEndList [chunk] == numberOfNodes;
 		}
 
-
-		public static Thread Tmapper;
-
-		public static void mapperFunction(){
-			String dllPath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), MapReduceUtils.USERDLL_NAME);
-
-			Assembly assembly = Assembly.LoadFrom(dllPath);
-			AppDomain.CurrentDomain.Load(assembly.GetName());
-			Type t = assembly.GetType("Reducer");
-
-			var propperMapper = Activator.CreateInstance(t);
-			var methodSetIP = t.GetMethod("setListOfNodes");
-			methodSetIP.Invoke (propperMapper,new object[]{StatusConfigContainer.listOfNodes});
-
-
-			//			string[] files = System.IO.Directory.GetFiles("/home/xniv/", "*.txt");
-
-			/*
-			foreach (int chunk in chunksToProcess) {
-				string line;
-				String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk.ToString() + DfsUtils.CHUNKID_SEPARATOR + fileNameIn);
-
-				// Read the file and display it line by line.
-				System.IO.StreamReader file = 
-					new System.IO.StreamReader(filePath);
-				while((line = file.ReadLine()) != null)
-				{
-					var methodRun = t.GetMethod("run");
-					methodRun.Invoke (propperMapper,new object[]{line});
-				}
-
-				file.Close();
-
-			}*/
-			//wyslij koniec;
-			var methodEndWork = t.GetMethod("endWork");
-			methodEndWork.Invoke (propperMapper,null);
-			StatusConfigContainer.Status = StatusType.WAITING_FOR_REDUCE;
+		public static void runReduce ()
+		{
+			StatusConfigContainer.Status = StatusType.REDUCE;
+			//widziałem że w maperze wyciągnąłes obiekt z wątkiem na zawnątrz - nie wiem czy jest to konieczne - check it!
+			Thread thread = new Thread (new ThreadStart (ReducerUtils.reduce));
+			thread.Start ();
 		}
 
-		public static void startMapperWork(){
-			Tmapper = new Thread (new ThreadStart (mapperFunction));
-			Tmapper.Start ();
-			StatusConfigContainer.Status = StatusType.REDUCE;
+		public static void reduce ()
+		{
+			Assembly assembly = Assembly.LoadFrom (MapReduceUtils.pathToDll);
+			//AppDomain.CurrentDomain.Load (assembly.GetName ());
+			Type reduceClass = assembly.GetType ("Reducer");
+
+			ApiMaperReducer.ApiReducer reducer = (ApiMaperReducer.ApiReducer)Activator.CreateInstance (reduceClass);
+
+			String filePath = DfsWorkerUtils.getPathToChunk (StatusConfigContainer.fileNameOut, StatusConfigContainer.workerId);
+			StreamWriter writer = new StreamWriter (filePath);
+			reducer.writer = writer;
+
+			foreach (var keyFile in  Directory.GetFiles(MapReduceUtils.GetWorkingDirectory (), "*"+MAPER_RESULT_EXTENSION)) {
+				var key = keyFile.Substring (0, keyFile.Length - MAPER_RESULT_EXTENSION.Length); //check it!!!
+				List<String> values = System.IO.File.ReadAllLines (Path.Combine (MapReduceUtils.GetWorkingDirectory (), keyFile)).ToList();
+
+				reducer.reduce (key, values);
+			}
+
+			writer.Close ();
+			StatusConfigContainer.Status = StatusType.END;
 		}
 	}
 }
