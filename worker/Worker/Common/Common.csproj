@@ -65,8 +65,6 @@
     <Compile Include="DFS\worker\DeleteChunk.cs" />
     <Compile Include="DFS\master\SaveFile.cs" />
     <Compile Include="Hash\HashUtils.cs" />
-    <Compile Include="Reducer\SendMappedData.cs" />
-    <Compile Include="Reducer\SendMapperEndWork.cs" />
     <Compile Include="MapReduce\master\RunMR.cs" />
     <Compile Include="MapReduce\dto\TaskAssigment.cs" />
     <Compile Include="MapReduce\worker\RunMRTask.cs" />
@@ -74,6 +72,8 @@
     <Compile Include="MapReduce\dto\StatusType.cs" />
     <Compile Include="MapReduce\worker\GetStatus.cs" />
     <Compile Include="MapReduce\MRUtil.cs" />
+    <Compile Include="MapReduce\worker\SendMappedData.cs" />
+    <Compile Include="MapReduce\worker\SendMapperEndWork.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

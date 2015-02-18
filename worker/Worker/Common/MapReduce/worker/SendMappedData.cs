@@ -11,7 +11,7 @@ namespace Worker
 			set;
 		}
 
-		public int id { get; set; }
+		//public int id { get; set; }
 
 		public string key { get; set; }
 
