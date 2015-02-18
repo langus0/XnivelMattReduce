@@ -42,13 +42,13 @@ namespace Common
 			returnList.Add (tmp);
 			return returnList;
 		}
-		public List<String> makeListOfAddressesFromKey(string key,List<String> ListOfNodes)
+		public string[] makeListOfAddressesFromKey(string key,string[] ListOfNodes)
 		{
 			int tmp;
 			List<String> returnList = new List<String> ();
-			tmp = (int) ((new BigInteger (GetBytes (key)))%ListOfNodes.Count);
+			tmp = (int) ((new BigInteger (GetBytes (key)))%ListOfNodes.Length);
 			returnList.Add (ListOfNodes[tmp]);
-			return returnList;
+			return returnList.ToArray();
 		}
 	}
 }

@@ -61,7 +61,7 @@ namespace Worker
 
 			//			string[] files = System.IO.Directory.GetFiles("/home/xniv/", "*.txt");
 
-
+			/*
 			foreach (int chunk in chunksToProcess) {
 				string line;
 				String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk.ToString() + DfsUtils.CHUNKID_SEPARATOR + fileNameIn);
@@ -77,7 +77,7 @@ namespace Worker
 
 				file.Close();
 
-			}
+			}*/
 			//wyslij koniec;
 			var methodEndWork = t.GetMethod("endWork");
 			methodEndWork.Invoke (propperMapper,null);

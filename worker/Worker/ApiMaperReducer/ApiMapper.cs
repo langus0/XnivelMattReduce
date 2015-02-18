@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ServiceStack;
 using ServiceStack.Logging;
-using Common;
+//using Common;
 
 
 namespace ApiMaperReducer
@@ -37,12 +37,13 @@ namespace ApiMaperReducer
 				}
 			}
 		}
+		public abstract void map (string line);
 
 		public void send(string key,string value)
 		{
 			Common.HashUtils HashUtil = new Common.HashUtils ();
 			String hashedKey = HashUtil.makeHashKey (key);
-			List<string> ListOfAddresses = HashUtil.makeListOfAddressesFromKey (hashedKey, listOfNodes);
+			string[] ListOfAddresses = HashUtil.makeListOfAddressesFromKey (hashedKey, listOfNodes);
 			foreach (var worker in ListOfAddresses) {
 				var client = new JsonServiceClient (worker);
 

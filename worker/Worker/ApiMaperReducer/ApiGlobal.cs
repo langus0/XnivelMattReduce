@@ -5,8 +5,8 @@ namespace ApiMaperReducer
 {
 	public abstract class ApiGlobal
 	{
-		public List<string> listOfNodes {get;set;}
-		public void setListOfNodes(List<string> list){
+		public string[] listOfNodes {get;set;}
+		public void setListOfNodes(string[] list){
 			listOfNodes = list;
 		}
 	}

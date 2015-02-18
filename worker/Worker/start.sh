@@ -27,7 +27,7 @@ if [ "$type" == "w" -o "$type" == "a" ]; then
 	if [ $numOfWorkers -gt 0 ]; then
 		for i in `seq $numOfWorkers`; do
 			echo "mono /tmp/Worker-$i/Worker.exe http://127.0.0.1:$((1336+$i))/"
-			xterm -e "mono /tmp/Worker-$i/Worker.exe http://127.0.0.1:$((1336+$i))/" &
+			xterm -e "mono /tmp/Worker-$i/Worker.exe http://127.0.0.1:$((1336+$i))/ ; read -n1 kbd" &
 		done
 	else
 		xterm -e "mono Worker/bin/Debug/Worker.exe"

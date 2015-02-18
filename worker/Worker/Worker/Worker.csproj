@@ -101,5 +101,9 @@
       <Project>{9E31C03B-47CC-486F-BE6B-533982B8311A}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ApiMaperReducer\ApiMaperReducer.csproj">
+      <Project>{0337EF79-37C4-4A54-B4C9-77A755B2F75E}</Project>
+      <Name>ApiMaperReducer</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@ namespace Worker
 
 		public object Put (SendMappedData request)
 		{
+			System.Console.WriteLine ("NOWA WIADOMOSC DLA REDUCE " + request.value);
 			if (ReducerUtils.correctid (request.chunk + request.key, request.id)) {
 				System.IO.File.AppendAllText(request.key+".txt", request.value + Environment.NewLine);
 			}
@@ -18,6 +19,7 @@ namespace Worker
 		}
 		public object Put (SendMapperEndWork request)
 		{
+			System.Console.WriteLine ("WIADOMOSC ENDWORK ");
 			ReducerUtils.newEndMapper (request.chunk);
 			if (ReducerUtils.recivedFromAllEndMapper (StatusConfigContainer.numberOfNodes)) {
 				//dzialaj
