@@ -10,7 +10,8 @@ namespace Worker
 
 	public class GetStatusResponse
 	{
-		public String Result{ get; set; }
+		public String CPUproc{ get; set; }
+		public String MEMproc{ get; set; }
 	}
 }
 

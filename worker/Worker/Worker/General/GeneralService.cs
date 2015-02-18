@@ -8,7 +8,7 @@ namespace Worker
 		public object Any(GetStatus request){
 			SystemLoadChecker systemChecker = new SystemLoadChecker ();
 			//return new GetStatusResponse { Result = systemChecker.getAvailableRAM()+systemChecker.getCurrentCpuUsage()};
-			return new GetStatusResponse { Result = StatusConfigContainer.Status.GetDescription()};
+			return new GetStatusResponse { CPUproc=GeneralServiceUtils.getCPUproc(),MEMproc=GeneralServiceUtils.getMemproc()};
 		}
 	}
 }

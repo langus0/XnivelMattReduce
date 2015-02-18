@@ -1,0 +1,63 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workbench>
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Worker/MapReduce/ReducerRunner.cs">
+    <Files>
+      <File FileName="Worker/MapReduce/ReducerRunner.cs" Line="167" Column="45" />
+    </Files>
+>>>>>>> e93162ed0ec14912beac030756be82d66f2a596f
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True" selected="True">
+          <Node name="ApiMaperReducer" expanded="True" />
+          <Node name="Common" expanded="True">
+            <Node name="Hash" expanded="True" />
+<<<<<<< HEAD
+            <Node name="MapReduce" expanded="True">
+              <Node name="worker" expanded="True" />
+            </Node>
+            <Node name="Reducer" expanded="True" />
+=======
+>>>>>>> e93162ed0ec14912beac030756be82d66f2a596f
+          </Node>
+          <Node name="ExampleMapper" expanded="True" />
+          <Node name="Master" expanded="True">
+            <Node name="DFS" expanded="True">
+              <Node name="utils" expanded="True" />
+            </Node>
+            <Node name="MapReduce" expanded="True" />
+          </Node>
+          <Node name="Master" expanded="True">
+            <Node name="MapReduce" expanded="True" />
+          </Node>
+          <Node name="Worker" expanded="True">
+<<<<<<< HEAD
+            <Node name="MapReduce" expanded="True" />
+            <Node name="Reducer" expanded="True" />
+=======
+            <Node name="DFS" expanded="True">
+              <Node name="utils" expanded="True" />
+            </Node>
+            <Node name="General" expanded="True">
+              <Node name="utils" expanded="True" />
+            </Node>
+            <Node name="MapReduce" expanded="True">
+              <Node name="ReducerRunner.cs" selected="True" />
+            </Node>
+>>>>>>> e93162ed0ec14912beac030756be82d66f2a596f
+          </Node>
+          <Node name="XMTool" expanded="True" />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

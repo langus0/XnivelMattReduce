@@ -76,6 +76,7 @@
     <Compile Include="MapReduce\StatusConfigContainer.cs" />
     <Compile Include="MapReduce\MapperRunner.cs" />
     <Compile Include="MapReduce\ReducerRunner.cs" />
+    <Compile Include="General\utils\GeneralServiceUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
