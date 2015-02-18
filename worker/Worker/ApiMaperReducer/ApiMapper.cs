@@ -11,7 +11,7 @@ namespace ApiMaperReducer
 	{
 		public int chunk { private get; set; }
 		private static ILog log = LogManager.GetLogger (typeof(ApiMapper));
-		private Dictionary<string, int> keyList = new Dictionary<string, int> ();
+	/*	private Dictionary<string, int> keyList = new Dictionary<string, int> ();
 		private int IdFromKey(string key)
 		{
 			if (!keyList.ContainsKey (key)) {
@@ -21,7 +21,7 @@ namespace ApiMaperReducer
 			}
 			return keyList [key];
 
-		}
+		}*/
 		public void endWork()
 		{
 			foreach (var worker in listOfNodes) {
@@ -49,7 +49,7 @@ namespace ApiMaperReducer
 				var client = new JsonServiceClient (worker);
 
 				Worker.SendMappedData sendData = new Worker.SendMappedData ();
-				sendData.id = IdFromKey (key);
+				//sendData.id = IdFromKey (key);
 				sendData.chunk = chunk;
 				sendData.key = key;
 				sendData.value = value;

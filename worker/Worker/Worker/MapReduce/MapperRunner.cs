@@ -21,7 +21,7 @@ namespace Worker
 		{
 			String dllPath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), MapReduceUtils.USERDLL_NAME);
 
-			System.Console.WriteLine ("dllpath "+dllPath);
+			log.Debug ("Dll in  "+dllPath);
 
 			Assembly assembly = Assembly.LoadFrom(dllPath);
 

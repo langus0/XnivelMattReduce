@@ -11,7 +11,6 @@ namespace ExampleMapper
 			string[] words = line.Split(' ');
 			foreach (string word in words)
 			{
-				System.Console.WriteLine ("zaraz wysle");
 				send (word, word);
 			}
 		}

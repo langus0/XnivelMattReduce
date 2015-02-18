@@ -25,14 +25,14 @@ namespace Worker
 
 			GlobalRequestFilters.Add ((req, resp, requestDto) => {
 				ILog log = LogManager.GetLogger (GetType ());
-				log.Info (string.Format (
+				log.Debug (string.Format (
 					"REQ {0}: {1} {2} {3} {4} {5}\n",
 					DateTimeOffset.Now.Ticks,req.Verb,
 					req.OperationName, req.RemoteIp, req.RawUrl, req.UserAgent));
 			});
 			GlobalResponseFilters.Add ((req, resp, requestDto) => {
 				ILog log = LogManager.GetLogger (GetType ());
-				log.Info (string.Format (
+				log.Debug (string.Format (
 					"RES {0}: {1} {2}\n",
 					DateTimeOffset.Now.Ticks, resp.StatusCode, resp.ContentType));
 			});
