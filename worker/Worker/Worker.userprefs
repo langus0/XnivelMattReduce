@@ -1,18 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Worker/MapReduce/StatusConfigContainer.cs">
-    <Files>
-      <File FileName="Worker/MapReduce/StatusConfigContainer.cs" Line="108" Column="40" />
-      <File FileName="ExampleMapper/MyClass.cs" Line="20" Column="1" />
-      <File FileName="ApiMaperReducer/ApiMapper.cs" Line="46" Column="52" />
-      <File FileName="Common/Hash/HashUtils.cs" Line="27" Column="5" />
-      <File FileName="ApiMaperReducer/ApiGlobal.cs" Line="11" Column="4" />
-      <File FileName="Worker/MapReduce/MapReduceWokrerService.cs" Line="20" Column="30" />
-      <File FileName="Worker/MapReduce/MapReduceUtils.cs" Line="33" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
           <Node name="ApiMaperReducer" expanded="True" />
           <Node name="Common" expanded="True">
             <Node name="DFS" expanded="True">
@@ -22,21 +13,17 @@
             <Node name="MapReduce" expanded="True">
               <Node name="worker" expanded="True" />
             </Node>
+            <Node name="Reducer" expanded="True" />
           </Node>
           <Node name="ExampleMapper" expanded="True">
             <Node name="References" expanded="True" />
           </Node>
+          <Node name="Master" expanded="True">
+            <Node name="MapReduce" expanded="True" />
+          </Node>
           <Node name="Worker" expanded="True">
-            <Node name="DFS" expanded="True">
-              <Node name="utils" expanded="True" />
-            </Node>
-            <Node name="MapReduce" expanded="True">
-              <Node name="StatusConfigContainer.cs" selected="True" />
-            </Node>
-            <Node name="Properties" expanded="True" />
-            <Node name="Reducer" expanded="True">
-              <Node name="utils" expanded="True" />
-            </Node>
+            <Node name="MapReduce" expanded="True" />
+            <Node name="Reducer" expanded="True" />
           </Node>
         </State>
       </Pad>

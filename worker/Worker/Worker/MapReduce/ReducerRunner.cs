@@ -46,6 +46,7 @@ namespace Worker
 
 		public static bool newEndMapper (int chunk)
 		{
+			System.Console.WriteLine ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			if (!recivedEndList.ContainsKey (chunk)) {
 				recivedEndList.Add (chunk, 1);
 				return true;
