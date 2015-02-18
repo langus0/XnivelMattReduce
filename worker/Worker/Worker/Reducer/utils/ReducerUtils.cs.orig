@@ -11,7 +11,7 @@ namespace Worker
 	public class ReducerUtils
 	{
 		private static Dictionary<string, int> keyList = new Dictionary<string, int> ();
-		private static Dictionary<int, int> recivedEndList = new Dictionary<int, int> ();
+		private static Dictionary<string, int> recivedEndList = new Dictionary<string, int> ();
 		private const string MAPER_RESULT_EXTENSION = ".key";
 
 		public static void saveMapResult (SendMappedData request)
@@ -22,7 +22,7 @@ namespace Worker
 			}
 		}
 
-		public static bool isUnseenId (int chunk, string key, int id)
+		public static bool isUnseenId (string chunk, string key, int id)
 		{
 			var chunkAndKey = chunk + "#" + key;
 			if (!keyList.ContainsKey (chunkAndKey)) {
@@ -37,7 +37,7 @@ namespace Worker
 			}
 		}
 
-		public static bool newEndMapper (int chunk)
+		public static bool newEndMapper (string chunk)
 		{
 			if (!recivedEndList.ContainsKey (chunk)) {
 				recivedEndList.Add (chunk, 1);
@@ -49,31 +49,52 @@ namespace Worker
 
 		public static bool recivedFromAllEndMapper ()
 		{
-			System.Console.WriteLine ("TEST " + keyList.Count + " " + StatusConfigContainer.totalNumberOfChunks);
 			return keyList.Count == StatusConfigContainer.totalNumberOfChunks;
 		}
 
-		public static bool recivedAllFromOneEndMapper (int chunk, int numberOfNodes)
+		public static bool recivedAllFromOneEndMapper (string chunk, int numberOfNodes)
 		{
 			return recivedEndList [chunk] == numberOfNodes;
 		}
 
 		public static void runReduce ()
 		{
-			System.Console.WriteLine ("uruchomiono reduce");
 			StatusConfigContainer.Status = StatusType.REDUCE;
 			//widziałem że w maperze wyciągnąłes obiekt z wątkiem na zawnątrz - nie wiem czy jest to konieczne - check it!
 			Thread thread = new Thread (new ThreadStart (ReducerUtils.reduce));
 			thread.Start ();
 		}
 
+<<<<<<< HEAD
+		public static Thread Tmapper;
+
+		public static void mapperFunction(){
+			String dllPath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), MapReduceUtils.USERDLL_NAME);
+
+			Assembly assembly = Assembly.LoadFrom(dllPath);
+			AppDomain.CurrentDomain.Load(assembly.GetName());
+			Type t = assembly.GetType("Reducer");
+
+			var propperMapper = Activator.CreateInstance(t);
+			var methodSetIP = t.GetMethod("setListOfNodes");
+			methodSetIP.Invoke (propperMapper,new object[]{StatusConfigContainer.listOfNodes});
+
+
+			//			string[] files = System.IO.Directory.GetFiles("/home/xniv/", "*.txt");
+
+			/*
+			foreach (int chunk in chunksToProcess) {
+				string line;
+				String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk.ToString() + DfsUtils.CHUNKID_SEPARATOR + fileNameIn);
+=======
 		public static void reduce ()
 		{
 			Assembly assembly = Assembly.LoadFrom (MapReduceUtils.pathToDll);
 			//AppDomain.CurrentDomain.Load (assembly.GetName ());
-			Type reduceClass = assembly.GetType ("ExampleMapper.Reducer");
+			Type reduceClass = assembly.GetType ("Reducer");
 
 			ApiMaperReducer.ApiReducer reducer = (ApiMaperReducer.ApiReducer)Activator.CreateInstance (reduceClass);
+>>>>>>> bf901700093d88f343766d8e3cc59bde30e8cafa
 
 			String filePath = DfsWorkerUtils.getPathToChunk (StatusConfigContainer.fileNameOut, StatusConfigContainer.workerId);
 			StreamWriter writer = new StreamWriter (filePath);
@@ -83,11 +104,19 @@ namespace Worker
 				var key = keyFile.Substring (0, keyFile.Length - MAPER_RESULT_EXTENSION.Length); //check it!!!
 				List<String> values = System.IO.File.ReadAllLines (Path.Combine (MapReduceUtils.GetWorkingDirectory (), keyFile)).ToList();
 
+<<<<<<< HEAD
+			}*/
+			//wyslij koniec;
+			var methodEndWork = t.GetMethod("endWork");
+			methodEndWork.Invoke (propperMapper,null);
+			StatusConfigContainer.Status = StatusType.WAITING_FOR_REDUCE;
+		}
+=======
 				reducer.reduce (key, values);
 			}
+>>>>>>> bf901700093d88f343766d8e3cc59bde30e8cafa
 
 			writer.Close ();
-			System.Console.WriteLine ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!KONIEC REDUCE");
 			StatusConfigContainer.Status = StatusType.END;
 		}
 	}

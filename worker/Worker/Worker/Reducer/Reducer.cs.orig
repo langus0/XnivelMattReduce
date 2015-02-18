@@ -12,9 +12,16 @@ namespace Worker
 
 		public object Put (SendMappedData request)
 		{
-			System.Console.WriteLine ("WIADOMOSC NOWE DANE "+request.value);
+<<<<<<< HEAD
+			System.Console.WriteLine ("NOWA WIADOMOSC DLA REDUCE " + request.value);
+			if (ReducerUtils.correctid (request.chunk + request.key, request.id)) {
+				System.IO.File.AppendAllText(request.key+".txt", request.value + Environment.NewLine);
+			}
+			return true;
+=======
 			ReducerUtils.saveMapResult (request);
 			return new SendMappedDataResponse ();
+>>>>>>> bf901700093d88f343766d8e3cc59bde30e8cafa
 		}
 
 		public object Put (SendMapperEndWork request)

@@ -39,6 +39,11 @@ namespace Worker
 				        select assigment.listOfChunksToProcess.Count).Sum ();
 			} }
 
+		public static int numberOfNodes { get{
+				return assigments.Count ();
+			} }
+
+		//public static List<string> listOfNodes { get ; set; }//To samo zwraca reducersIPs
 
 		public static Thread Tmapper;
 
@@ -46,6 +51,7 @@ namespace Worker
 		{
 			String dllPath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), MapReduceUtils.USERDLL_NAME);
 
+<<<<<<< HEAD
 			System.Console.WriteLine ("dllpath "+dllPath);
 
 			Assembly assembly = Assembly.LoadFrom(dllPath);
@@ -72,15 +78,25 @@ namespace Worker
 			/*
 			var propperMapper = Activator.CreateInstance(t);
 			var methodSetIP = t.GetMethod("setListOfNodes");
+=======
+			Assembly assembly = Assembly.LoadFrom (dllPath);
+			AppDomain.CurrentDomain.Load (assembly.GetName ());
+			Type t = assembly.GetType ("Mapper");
+
+			var propperMapper = Activator.CreateInstance (t);
+			var methodSetIP = t.GetMethod ("setListOfNodes");
+			methodSetIP.Invoke (propperMapper, new object[] { reducersIPs.ToList() });
+>>>>>>> bf901700093d88f343766d8e3cc59bde30e8cafa
 
 			methodSetIP.Invoke (propperMapper,new object[]{listOfNodes});
 			*/
 
 			foreach (int chunk in chunksToProcess) {
+<<<<<<< HEAD
 				//String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk.ToString() + DfsUtils.CHUNKID_SEPARATOR + fileNameIn);
 
 				// Read the file and display it line by line.
-				mapper.chunk = chunk;
+
 				Chunk readedChunk = DfsWorkerUtils.readChunk (fileNameIn, chunk);
 
 				foreach(string line in readedChunk.data)
@@ -92,14 +108,33 @@ namespace Worker
 				}
 
 
+=======
+				string line;
+				String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk.ToString () + DfsUtils.CHUNKID_SEPARATOR + fileNameIn);
+
+				// Read the file and display it line by line.
+				System.IO.StreamReader file = 
+					new System.IO.StreamReader (filePath);
+				while ((line = file.ReadLine()) != null) {
+					var methodRun = t.GetMethod ("run");
+					methodRun.Invoke (propperMapper, new object[] { line });
+				}
+
+				file.Close ();
+>>>>>>> bf901700093d88f343766d8e3cc59bde30e8cafa
 
 			}
-
+			/*
 			//wyslij koniec;
-			//var methodEndWork = t.GetMethod("endWork");
-			//methodEndWork.Invoke (propperMapper,null);
-
-			mapper.endWork ();
+<<<<<<< HEAD
+			var methodEndWork = t.GetMethod("endWork");
+			methodEndWork.Invoke (propperMapper,null);
+			*/
+			//mapper.endWork ();
+=======
+			var methodEndWork = t.GetMethod ("endWork");
+			methodEndWork.Invoke (propperMapper, null);
+>>>>>>> bf901700093d88f343766d8e3cc59bde30e8cafa
 			Status = StatusType.WAITING_FOR_REDUCE;
 		}
 
@@ -125,8 +160,20 @@ namespace Worker
 			                   group assigment by assigment.workerIP into g
 			                   select  g
 			).Count ();
-		}*/
+		}
 
+<<<<<<< HEAD
+
+=======
+*/
+		public static string[] reducersIPs {
+			get {
+				return (from assigment in assigments
+				        orderby assigment.workerId
+				        select assigment.workerIP).ToArray ();
+			}
+		}
+>>>>>>> bf901700093d88f343766d8e3cc59bde30e8cafa
 
 		public static int workerId {
 			get {

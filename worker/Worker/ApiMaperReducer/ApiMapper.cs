@@ -9,7 +9,7 @@ namespace ApiMaperReducer
 {
 	public abstract class ApiMapper : ApiGlobal
 	{
-		public string chunk { private get; set; }
+		public int chunk { private get; set; }
 		private static ILog log = LogManager.GetLogger (typeof(ApiMapper));
 		private Dictionary<string, int> keyList = new Dictionary<string, int> ();
 		private int IdFromKey(string key)
@@ -31,7 +31,7 @@ namespace ApiMaperReducer
 				sendData.chunk = chunk;
 
 				try {
-					var response = client.Put (new Worker.SendMapperEndWork ());
+					var response = client.Put (sendData);
 				} catch (Exception e) {
 					log.Error (e);
 				}
@@ -54,7 +54,8 @@ namespace ApiMaperReducer
 				sendData.value = value;
 
 				try {
-					var response = client.Put (new Worker.SendMappedData ());
+					//var response = client.Put (new Worker.SendMappedData ());
+					var response = client.Put (sendData);
 				} catch (Exception e) {
 					log.Error (e);
 				}

@@ -6,7 +6,7 @@ namespace Worker
 	[Route("/reducer/sendData", "PUT")]
 	public class SendMappedData:IReturn<SendMappedData>
 	{
-		public string chunk {
+		public int chunk {
 			get;
 			set;
 		}
