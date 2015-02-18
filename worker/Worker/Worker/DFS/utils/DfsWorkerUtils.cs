@@ -31,7 +31,7 @@ namespace Worker
 			if (!System.IO.File.Exists (filePath)) {
 				throw new ArgumentException ("Chunk does not exists!");
 			}
-			Chunk chunk = new Chunk ();
+
 			var data = System.IO.File.ReadAllLines (filePath).ToList();
 			return new Chunk (new FileInfo (filePath), data);
 		}

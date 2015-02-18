@@ -1,6 +1,7 @@
 using System;
 using ServiceStack;
 using System.Configuration;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -18,6 +19,7 @@ namespace XMTool
 			System.Console.WriteLine (" ll - list DFS with details");
 			System.Console.WriteLine (" register - register user\t");
 			System.Console.WriteLine (" rm FILENAME - remove file from DFS");
+			System.Console.WriteLine (" rmall - remove all file from DFS");
 			System.Console.WriteLine (" put FILENAME NUM_CHUNKS NUM_REPLICAS - save file to DFS");
 			System.Console.WriteLine (" cat FILENAME - read file from DFS");
 			System.Console.WriteLine (" run FILENAME_DLL FILE_IN FILE_OUT - run MR task");
@@ -33,13 +35,13 @@ namespace XMTool
 			return client;
 		}
 
-		public static void ls (bool detail)
+		public static List<Common.FileHeader> ls (bool detail)
 		{
 			Master.Ls request = new Master.Ls ();
 			Master.LsResponse response = getClient ().Get (request);
 			if (response.IsErrorResponse ()) {
 				System.Console.WriteLine ("Something went wrong...");
-				return;
+				return null;
 			}
 			System.Console.WriteLine ("Inactive workers: {0}\n\n".FormatWith (response.inactiveWorkers.ToJson ()));
 
@@ -54,6 +56,7 @@ namespace XMTool
 					}
 				}
 			}
+			return response.Result;
 
 		}
 
@@ -76,14 +79,22 @@ namespace XMTool
 
 		}
 
+		public static void rmAll ()
+		{
+			var files = ls (false);
+			foreach (var file in files) {
+				rm (file.fileName);
+			}
+		}
+
 		public static void rm (string name)
 		{
+			System.Console.WriteLine ("Deleting " + name);
 			Master.DeleteFile request = new Master.DeleteFile { FileName=name };
 			var response = getClient ().Delete (request);
 
 			if (response.IsErrorResponse ()) {
 				System.Console.WriteLine ("Something went wrong...");
-				return;
 			}
 		}
 
@@ -144,7 +155,11 @@ namespace XMTool
 				return;
 			}
 			if (args [0].EqualsIgnoreCase ("rm")) {
-				rm (args [1]);
+					rm (args [1]);
+				return;
+			}
+			if (args [0].EqualsIgnoreCase ("rmall")) {
+				rmAll ();
 				return;
 			}
 			if (args [0].EqualsIgnoreCase ("run")) {

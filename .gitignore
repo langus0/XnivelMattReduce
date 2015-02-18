@@ -3,3 +3,5 @@ worker/Worker/packages/
 **/bin/
 *.userprefs
 *~
+*.sh
+*.config

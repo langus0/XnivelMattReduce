@@ -12,7 +12,7 @@ namespace Worker
 	public static class StatusConfigContainer
 	{
 
-		private static ILog log = LogManager.GetLogger (typeof(StatusConfigContainer));
+	//	private static ILog log = LogManager.GetLogger (typeof(StatusConfigContainer));
 
 		public static Common.StatusType Status{ get; set; }
 
@@ -39,27 +39,6 @@ namespace Worker
 				        select assigment.listOfChunksToProcess.Count).Sum ();
 			} }
 
-
-	
-		/*To samo zwraca reducersIPs
-		public static void createlistOfNodes (List<TaskAssigment> assigments)
-		{
-			listOfNodes = (from assigment in assigments
-			 select assigment.workerIP).ToList ();
-		}
-*/
-		/*
-		 * //Assigment jest per worker więc assigmentów jest tyle ile assigmentów!
-		public static void countNumberOfNodes (List<TaskAssigment> assigments)
-		{
-
-			numberOfNodes = (from assigment in assigments
-			                   group assigment by assigment.workerIP into g
-			                   select  g
-			).Count ();
-		}*/
-
-
 		public static int workerId {
 			get {
 				if (Status == StatusType.IDLE)
@@ -82,8 +61,8 @@ namespace Worker
 			fileNameIn = null;
 			fileNameOut = null;
 			assigments = null;
-			MapperUtils.clear ();
-			ReducerUtils.clear ();
+			MapperRunner.clear ();
+			ReducerRunner.clear ();
 		}
 
 		public static void prepare (string fileNameIn, string fileNameOut, List<TaskAssigment> assigments)

@@ -7,7 +7,7 @@ namespace ApiMaperReducer
 {
 	public abstract class ApiReducer : ApiGlobal
 	{
-		private static ILog log = LogManager.GetLogger (typeof(ApiMapper));
+
 		public StreamWriter writer;
 
 		public abstract void reduce (string key, List<string> values);

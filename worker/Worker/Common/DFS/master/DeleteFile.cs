@@ -5,7 +5,7 @@ using Common;
 namespace Master
 {
 	[Route("/dfs/deleteFile/{FileName}", "DELETE")]
-	public class DeleteFile
+	public class DeleteFile:IReturn<DeleteFileResponse>
 	{
 		public string FileName{ get; set; }
 	}
