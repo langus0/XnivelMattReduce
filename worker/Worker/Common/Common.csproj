@@ -74,6 +74,7 @@
     <Compile Include="MapReduce\MRUtil.cs" />
     <Compile Include="MapReduce\worker\SendMappedData.cs" />
     <Compile Include="MapReduce\worker\SendMapperEndWork.cs" />
+    <Compile Include="MapReduce\master\GetStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

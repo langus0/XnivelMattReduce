@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Linq;
 using ServiceStack.Logging;
 using Common;
+using ServiceStack;
 
 namespace Worker
 {
@@ -86,7 +87,8 @@ namespace Worker
 */
 		public static bool newEndMapper (int chunk)
 		{
-			System.Console.WriteLine ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			//System.Console.WriteLine ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.Console.WriteLine (recivedEndList.Keys.ToList().ToJson());
 			if (!recivedEndList.ContainsKey (chunk)) {
 				recivedEndList.Add (chunk, 1);
 				return true;

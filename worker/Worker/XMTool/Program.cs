@@ -11,6 +11,7 @@ namespace XMTool
 	{
 		const String FORMAT = "{0,-15}	{1,-8}	{2,-6}	{3,-10}	{4, -2}";
 		const String FORMAT_DETAILS = ">>>\t {0,-8}	{1,-8}	{2,-20}";
+		const String FORMAT_STATUS = "{0,-25} {1,-8} {2,-8} {3:-8}";
 
 		public static void showHelp ()
 		{
@@ -23,6 +24,7 @@ namespace XMTool
 			System.Console.WriteLine (" put FILENAME NUM_CHUNKS NUM_REPLICAS - save file to DFS");
 			System.Console.WriteLine (" cat FILENAME - read file from DFS");
 			System.Console.WriteLine (" run FILENAME_DLL FILE_IN FILE_OUT - run MR task");
+			System.Console.WriteLine (" status - list statuses of workers");
 		}
 
 		public static JsonServiceClient getClient ()
@@ -132,6 +134,16 @@ namespace XMTool
 			}
 		}
 
+		public static void status(){
+			Master.GetStatus request = new Master.GetStatus ();
+			Master.GetStatusResponse response =  getClient ().Get (request);	
+			System.Console.WriteLine ("Inactive workers: {0}\n".FormatWith (response.inactiveWorkers.ToJson ()));
+
+			System.Console.WriteLine (FORMAT_STATUS.FormatWith ("IP", "CPU", "MEM", "Status"));
+			foreach (var worker in response.statuses) {
+				System.Console.WriteLine (FORMAT_STATUS.FormatWith (worker.IP, worker.CPUproc, worker.MEMproc, worker.Status));
+			}
+		}
 		public static void Main (string[] args)
 		{
 			if (args.Length < 1) {
@@ -168,6 +180,10 @@ namespace XMTool
 			}
 			if (args [0].EqualsIgnoreCase ("cat")) {
 				cat (args [1]);
+				return;
+			}
+			if (args [0].EqualsIgnoreCase ("status")) {
+				status ();
 				return;
 			}
 			System.Console.WriteLine ("Command not found...");

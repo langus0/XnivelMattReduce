@@ -96,6 +96,36 @@ namespace Master
 			}
 			return assigments;
 		}
+
+
+		public static Tuple<List<Worker.GetStatusResponse>, List<string>> getStatuses ()
+		{
+			log.Info ("Checking statuses...");
+			List<Worker.GetStatusResponse> statuses = new List<Worker.GetStatusResponse> ();
+			List<string> workersWithErrors = new List <string> ();
+
+			var workersList = WorkersUtil.listOfWorkers;
+
+			foreach (var worker in workersList) {
+				Worker.GetStatusResponse response = null;
+				try {
+				var client = new JsonServiceClient (worker);
+				log.DebugFormat ("Status request to {0}", worker);
+					response=client.Get (new Worker.GetStatus ());
+				} catch (Exception e) {
+					log.Error (e);
+				}
+				if (response == null || response.IsErrorResponse ()) {
+					workersWithErrors.Add (worker);
+					continue;
+				}
+				statuses.Add(response);
+
+
+			}
+
+			return Tuple.Create (statuses, workersWithErrors);
+		}
 	}
 }
 

@@ -14,6 +14,13 @@ namespace Master
 			MapReduceUtils.runMRJob (request, taskAssigment);
 			return new RunMRResponse ();
 		}
+
+		public object Any (GetStatus request)
+		{
+			var result = MapReduceUtils.getStatuses ();
+			return new GetStatusResponse {inactiveWorkers =result.Item2, statuses = result.Item1
+			};
+		}
 	}
 }
 

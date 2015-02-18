@@ -1,38 +1,27 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Worker/MapReduce/ReducerRunner.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Worker/app.config">
     <Files>
-      <File FileName="Worker/MapReduce/ReducerRunner.cs" Line="167" Column="45" />
+      <File FileName="Worker/MapReduce/StatusConfigContainer.cs" Line="1" Column="1" />
+      <File FileName="ExampleMapper/MyClass.cs" Line="1" Column="1" />
+      <File FileName="ApiMaperReducer/ApiMapper.cs" Line="1" Column="1" />
+      <File FileName="Common/Hash/HashUtils.cs" Line="1" Column="1" />
+      <File FileName="ApiMaperReducer/ApiGlobal.cs" Line="1" Column="1" />
+      <File FileName="Worker/MapReduce/MapReduceWokrerService.cs" Line="13" Column="44" />
+      <File FileName="Worker/MapReduce/MapReduceUtils.cs" Line="1" Column="1" />
+      <File FileName="Worker/app.config" Line="7" Column="1" />
+      <File FileName="Master/app.config" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True">
+        <State expanded="True">
           <Node name="ApiMaperReducer" expanded="True" />
-          <Node name="Common" expanded="True">
-            <Node name="Hash" expanded="True" />
+          <Node name="Common" expanded="True" />
+          <Node name="ExampleMapper" expanded="True">
+            <Node name="References" expanded="True" />
           </Node>
-          <Node name="ExampleMapper" expanded="True" />
-          <Node name="Master" expanded="True">
-            <Node name="DFS" expanded="True">
-              <Node name="utils" expanded="True" />
-            </Node>
-            <Node name="MapReduce" expanded="True" />
-          </Node>
-          <Node name="Master" expanded="True">
-            <Node name="MapReduce" expanded="True" />
-          </Node>
-          <Node name="Worker" expanded="True">
-            <Node name="DFS" expanded="True">
-              <Node name="utils" expanded="True" />
-            </Node>
-            <Node name="General" expanded="True">
-              <Node name="utils" expanded="True" />
-            </Node>
-            <Node name="MapReduce" expanded="True">
-              <Node name="ReducerRunner.cs" selected="True" />
-            </Node>
-          </Node>
-          <Node name="XMTool" expanded="True" />
+          <Node name="Master" expanded="True" />
+          <Node name="Worker" expanded="True" />
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">

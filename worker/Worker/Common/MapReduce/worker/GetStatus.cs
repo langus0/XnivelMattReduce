@@ -4,7 +4,7 @@ using ServiceStack;
 namespace Worker
 {
 	[Route("/getStatus")]
-	public class GetStatus
+	public class GetStatus:IReturn<GetStatusResponse>
 	{
 	}
 
@@ -12,6 +12,8 @@ namespace Worker
 	{
 		public String CPUproc{ get; set; }
 		public String MEMproc{ get; set; }
+		public String Status{ get; set; }
+		public String IP{ get; set; }
 	}
 }
 

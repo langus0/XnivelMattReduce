@@ -16,7 +16,7 @@ namespace Worker
 			pMEM.Start();
 			string MEMproc = pMEM.StandardOutput.ReadToEnd();
 			pMEM.WaitForExit();
-			return MEMproc;
+			return MEMproc.Trim();
 		}
 		public static string getCPUproc(){
 			Process pCPU = new Process();
@@ -28,7 +28,7 @@ namespace Worker
 			pCPU.Start();
 			string CPUproc = pCPU.StandardOutput.ReadToEnd();
 			pCPU.WaitForExit();
-			return CPUproc;
+			return CPUproc.Trim();
 		}
 	}
 }
