@@ -40,8 +40,10 @@ namespace Worker
 			mapper.setListOfNodes (StatusConfigContainer.reducersIps );
 
 			foreach (int chunk in StatusConfigContainer.chunksToProcess) {
+				log.InfoFormat ("Mapping chunk {0}...", chunk);
 				// Read the file and display it line by line.
 				mapper.chunk = chunk;
+				mapper.init (chunk);
 				Chunk readedChunk = DfsWorkerUtils.readChunk (StatusConfigContainer.fileNameIn, chunk);
 
 				foreach(string line in readedChunk.data)
@@ -66,5 +68,7 @@ namespace Worker
 			StatusConfigContainer.Status = StatusType.MAPPER;
 		}
 	}
+
+
 }
 

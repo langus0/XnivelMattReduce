@@ -26,7 +26,7 @@ namespace Worker
 
 		public object Put (SendMappedData request)
 		{
-			log.DebugFormat ("Recived new data from mappers <{0}, {1}>", request.key, request.value);
+			log.DebugFormat ("Recived new data from mappers {0}", request.listOfMapperResults.ToJson());
 			ReducerRunner.saveMapResult (request);
 			return new SendMappedDataResponse ();
 		}
