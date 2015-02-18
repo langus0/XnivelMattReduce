@@ -25,11 +25,15 @@ namespace Worker
 
 		public static void saveMapResult (SendMappedData request)
 		{
-
-			var path = Path.Combine (MapReduceUtils.GetWorkingDirectory (), getIdOfKey (request.key) + MAPER_RESULT_EXTENSION);
-			SaveQueue.append (path, request.value);
+			foreach (var keyValue in request.listOfMapperResults) {
+				var path = Path.Combine (MapReduceUtils.GetWorkingDirectory (), getIdOfKey (keyValue.Key) + MAPER_RESULT_EXTENSION);
+				SaveQueue.append (path, keyValue.Value);
+			}
 				//System.IO.File.AppendAllText (path, request.value + Environment.NewLine);
 	
+			//var path = Path.Combine (MapReduceUtils.GetWorkingDirectory (), getIdOfKey (request.key) + MAPER_RESULT_EXTENSION);
+			//SaveQueue.append (path, request.value);
+
 		}
 
 		private static int getIdOfKey(string key){
@@ -141,6 +145,7 @@ namespace Worker
 	}
 
 	public static class SaveQueue{
+		private static ILog log = LogManager.GetLogger (typeof(SaveQueue));
 		private static Dictionary<string, List<string>> valuesToSave = new Dictionary<string, List<string>>  ();
 		private static int counter = 0;
 
@@ -158,11 +163,13 @@ namespace Worker
 				valuesToSave[key].Add(value);
 				if (counter > 100000) {
 					saveToFile ();
+					counter = 0;
 				}
 			}
 		}
 
 		public static void saveToFile(){
+			log.Info ("Saving map results to files");
 				foreach(var values in valuesToSave){
 					System.IO.File.AppendAllLines  (values.Key, values.Value );
 				}

@@ -8,7 +8,7 @@ namespace Common
 {
 	public class HashUtils
 	{
-		private byte[] GetBytes(string str)
+		private static byte[] GetBytes(string str)
 		{
 			byte[] bytes = new byte[str.Length * sizeof(char)];
 			System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
@@ -49,6 +49,11 @@ namespace Common
 			tmp = (int) ((new BigInteger (GetBytes (key)))%ListOfNodes.Length);
 			returnList.Add (ListOfNodes[tmp]);
 			return returnList.ToArray();
+		}
+
+		public static int getReducerIDFromKey(string key, string[] ListOfNodes)
+		{
+			return  (int) ((new BigInteger (GetBytes (key)))%ListOfNodes.Length);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ServiceStack;
 
 namespace Worker
@@ -12,10 +13,10 @@ namespace Worker
 		}
 
 		//public int id { get; set; }
+		public List<KeyValuePair<string,string>> listOfMapperResults{ get; set; }
+		//public string key { get; set; }
 
-		public string key { get; set; }
-
-		public string value{ get; set; }
+		//public string value{ get; set; }
 	}
 
 	public class SendMappedDataResponse

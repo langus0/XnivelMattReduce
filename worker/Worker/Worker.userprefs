@@ -1,30 +1,38 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Worker/MapReduce/ReducerRunner.cs">
+    <Files>
+      <File FileName="Worker/MapReduce/ReducerRunner.cs" Line="167" Column="45" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True" selected="True">
           <Node name="ApiMaperReducer" expanded="True" />
           <Node name="Common" expanded="True">
-            <Node name="DFS" expanded="True">
-              <Node name="dto" expanded="True" />
-            </Node>
             <Node name="Hash" expanded="True" />
-            <Node name="MapReduce" expanded="True">
-              <Node name="worker" expanded="True" />
-            </Node>
-            <Node name="Reducer" expanded="True" />
           </Node>
-          <Node name="ExampleMapper" expanded="True">
-            <Node name="References" expanded="True" />
+          <Node name="ExampleMapper" expanded="True" />
+          <Node name="Master" expanded="True">
+            <Node name="DFS" expanded="True">
+              <Node name="utils" expanded="True" />
+            </Node>
+            <Node name="MapReduce" expanded="True" />
           </Node>
           <Node name="Master" expanded="True">
             <Node name="MapReduce" expanded="True" />
           </Node>
           <Node name="Worker" expanded="True">
-            <Node name="MapReduce" expanded="True" />
-            <Node name="Reducer" expanded="True" />
+            <Node name="DFS" expanded="True">
+              <Node name="utils" expanded="True" />
+            </Node>
+            <Node name="General" expanded="True">
+              <Node name="utils" expanded="True" />
+            </Node>
+            <Node name="MapReduce" expanded="True">
+              <Node name="ReducerRunner.cs" selected="True" />
+            </Node>
           </Node>
+          <Node name="XMTool" expanded="True" />
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
