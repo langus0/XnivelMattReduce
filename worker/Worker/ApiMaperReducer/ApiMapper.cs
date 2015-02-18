@@ -31,6 +31,7 @@ namespace ApiMaperReducer
 				sendData.chunk = chunk;
 
 				try {
+					log.DebugFormat("Sending endwork to {0}", worker);
 					var response = client.Put (sendData);
 				} catch (Exception e) {
 					log.Error (e);

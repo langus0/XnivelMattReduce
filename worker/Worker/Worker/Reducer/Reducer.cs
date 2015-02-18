@@ -12,14 +12,14 @@ namespace Worker
 
 		public object Put (SendMappedData request)
 		{
-			System.Console.WriteLine ("WIADOMOSC NOWE DANE "+request.value);
+			log.Debug ("WIADOMOSC NOWE DANE "+request.value);
 			ReducerUtils.saveMapResult (request);
 			return new SendMappedDataResponse ();
 		}
 
 		public object Put (SendMapperEndWork request)
 		{
-			System.Console.WriteLine ("WIADOMOSC ENDWORK ");
+			log.DebugFormat("Mappers ended work on chunk {0}",request.chunk);
 			ReducerUtils.newEndMapper (request.chunk);
 			if (ReducerUtils.recivedFromAllEndMapper ()) {
 				ReducerUtils.runReduce ();

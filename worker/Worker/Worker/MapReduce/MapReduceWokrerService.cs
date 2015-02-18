@@ -10,6 +10,7 @@ namespace Worker
 			System.Console.WriteLine ("reciv PREPAREMRTASK");
 			MapReduceUtils.clearWorkingDirectory ();
 			MapReduceUtils.saveDll (request.fileWithDll);
+			StatusConfigContainer.reset ();
 			StatusConfigContainer.prepare (request.fileNameIn, request.fileNameOut, request.taskAssigments);
 			return new PrepareMRTaskResponse ();
 		}
@@ -17,7 +18,7 @@ namespace Worker
 		public object Any (RunMRTask request)
 		{
 			System.Console.WriteLine ("reciv RUNMRTASK");
-			StatusConfigContainer.startWork ();
+			MapperUtils.startWork ();
 			return new RunMRTaskResponse ();
 		}
 

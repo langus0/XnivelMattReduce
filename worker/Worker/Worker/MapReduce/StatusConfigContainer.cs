@@ -40,75 +40,7 @@ namespace Worker
 			} }
 
 
-		public static Thread Tmapper;
-
-		public static void mapperFunction ()
-		{
-			String dllPath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), MapReduceUtils.USERDLL_NAME);
-
-			System.Console.WriteLine ("dllpath "+dllPath);
-
-			Assembly assembly = Assembly.LoadFrom(dllPath);
-
-			if (assembly == null) {
-				System.Console.WriteLine ("puste assembly");
-			}
-
-			AppDomain.CurrentDomain.Load(assembly.GetName());
-			Type mapClass = assembly.GetType("ExampleMapper.Mapper");
-
-			if (mapClass == null) {
-				System.Console.WriteLine ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			}
-
-			ApiMaperReducer.ApiMapper mapper = (ApiMaperReducer.ApiMapper)Activator.CreateInstance (mapClass);
-
-			if (mapper == null) {
-				System.Console.WriteLine ("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			}
-
-			mapper.setListOfNodes (reducersIps );
-
-			/*
-			var propperMapper = Activator.CreateInstance(t);
-			var methodSetIP = t.GetMethod("setListOfNodes");
-
-			methodSetIP.Invoke (propperMapper,new object[]{listOfNodes});
-			*/
-
-			foreach (int chunk in chunksToProcess) {
-				//String filePath = Path.Combine (MapReduceUtils.GetWorkingDirectory (), chunk.ToString() + DfsUtils.CHUNKID_SEPARATOR + fileNameIn);
-
-				// Read the file and display it line by line.
-				mapper.chunk = chunk;
-				Chunk readedChunk = DfsWorkerUtils.readChunk (fileNameIn, chunk);
-
-				foreach(string line in readedChunk.data)
-				{
-					System.Console.WriteLine ("$$ " + line);
-					//var methodRun = t.GetMethod("run");
-					//methodRun.Invoke (propperMapper,new object[]{line});
-					mapper.map (line);
-				}
-
-
-
-			}
-
-			//wyslij koniec;
-			//var methodEndWork = t.GetMethod("endWork");
-			//methodEndWork.Invoke (propperMapper,null);
-
-			mapper.endWork ();
-			Status = StatusType.WAITING_FOR_REDUCE;
-		}
-
-		public static void startWork ()
-		{
-			Tmapper = new Thread (new ThreadStart (mapperFunction));
-			Tmapper.Start ();
-			Status = StatusType.MAPPER;
-		}
+	
 		/*To samo zwraca reducersIPs
 		public static void createlistOfNodes (List<TaskAssigment> assigments)
 		{
@@ -150,6 +82,8 @@ namespace Worker
 			fileNameIn = null;
 			fileNameOut = null;
 			assigments = null;
+			MapperUtils.clear ();
+			ReducerUtils.clear ();
 		}
 
 		public static void prepare (string fileNameIn, string fileNameOut, List<TaskAssigment> assigments)

@@ -4,15 +4,22 @@ using System.Threading;
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using ServiceStack.Logging;
 using Common;
 
 namespace Worker
 {
 	public class ReducerUtils
 	{
+		private static ILog log = LogManager.GetLogger (typeof(ReducerUtils));
 		private static Dictionary<string, int> keyList = new Dictionary<string, int> ();
 		private static Dictionary<int, int> recivedEndList = new Dictionary<int, int> ();
 		private const string MAPER_RESULT_EXTENSION = ".key";
+
+		public static void clear(){
+			keyList = new Dictionary<string, int> ();
+			recivedEndList = new Dictionary<int, int> ();
+		}
 
 		public static void saveMapResult (SendMappedData request)
 		{
@@ -49,8 +56,8 @@ namespace Worker
 
 		public static bool recivedFromAllEndMapper ()
 		{
-			System.Console.WriteLine ("TEST " + keyList.Count + " " + StatusConfigContainer.totalNumberOfChunks);
-			return keyList.Count == StatusConfigContainer.totalNumberOfChunks;
+			System.Console.WriteLine ("TEST " + recivedEndList.Count + " " + StatusConfigContainer.totalNumberOfChunks);
+			return recivedEndList.Count == StatusConfigContainer.totalNumberOfChunks;
 		}
 
 		public static bool recivedAllFromOneEndMapper (int chunk, int numberOfNodes)
@@ -60,7 +67,7 @@ namespace Worker
 
 		public static void runReduce ()
 		{
-			System.Console.WriteLine ("uruchomiono reduce");
+			log.Debug("uruchomiono reduce");
 			StatusConfigContainer.Status = StatusType.REDUCE;
 			//widziałem że w maperze wyciągnąłes obiekt z wątkiem na zawnątrz - nie wiem czy jest to konieczne - check it!
 			Thread thread = new Thread (new ThreadStart (ReducerUtils.reduce));
@@ -69,9 +76,11 @@ namespace Worker
 
 		public static void reduce ()
 		{
+			log.Debug ("Running reduce...");
 			Assembly assembly = Assembly.LoadFrom (MapReduceUtils.pathToDll);
 			//AppDomain.CurrentDomain.Load (assembly.GetName ());
-			Type reduceClass = assembly.GetType ("ExampleMapper.Reducer");
+			Type reduceClass = assembly.GetTypes().Where(t=>typeof( ApiMaperReducer.ApiReducer).IsAssignableFrom(t)).First();
+			//Type reduceClass = assembly.GetType ("ExampleMapper.Reducer");
 
 			ApiMaperReducer.ApiReducer reducer = (ApiMaperReducer.ApiReducer)Activator.CreateInstance (reduceClass);
 
@@ -80,14 +89,15 @@ namespace Worker
 			reducer.writer = writer;
 
 			foreach (var keyFile in  Directory.GetFiles(MapReduceUtils.GetWorkingDirectory (), "*"+MAPER_RESULT_EXTENSION)) {
-				var key = keyFile.Substring (0, keyFile.Length - MAPER_RESULT_EXTENSION.Length); //check it!!!
+				var keyFileName = Path.GetFileName (keyFile);
+				var key = keyFileName.Substring (0, keyFileName.Length - MAPER_RESULT_EXTENSION.Length); //check it!!!
 				List<String> values = System.IO.File.ReadAllLines (Path.Combine (MapReduceUtils.GetWorkingDirectory (), keyFile)).ToList();
 
 				reducer.reduce (key, values);
 			}
 
 			writer.Close ();
-			System.Console.WriteLine ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!KONIEC REDUCE");
+			log.Debug ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!KONIEC REDUCE");
 			StatusConfigContainer.Status = StatusType.END;
 		}
 	}
