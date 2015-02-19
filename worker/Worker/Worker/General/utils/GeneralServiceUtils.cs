@@ -11,7 +11,7 @@ namespace Worker
 			pMEM.StartInfo.UseShellExecute = false;
 			pMEM.StartInfo.RedirectStandardOutput = true;
 			pMEM.StartInfo.FileName = "/bin/bash";
-			pMEM.StartInfo.Arguments = "-c \"top -bn1 | awk '/Mem/ { mem =  $5 / $3 * 100 \\\"%\\\" }; END   { print mem }' \"";
+			pMEM.StartInfo.Arguments = "-c \"top -bn1 | awk '/Mem:/ { mem =  $5 / $3 * 100 \\\"%\\\" }; END   { print mem }' \"";
 
 			pMEM.Start();
 			string MEMproc = pMEM.StandardOutput.ReadToEnd();
@@ -23,7 +23,7 @@ namespace Worker
 			pCPU.StartInfo.UseShellExecute = false;
 			pCPU.StartInfo.RedirectStandardOutput = true;
 			pCPU.StartInfo.FileName = "/bin/bash";
-			pCPU.StartInfo.Arguments = "-c \"grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage \\\"%\\\"}' \"";
+			pCPU.StartInfo.Arguments = "-c \"ps aux  | awk 'BEGIN { sum = 0 }  { sum += $3 }; END { print sum \\\"%\\\" }' \"";
 
 			pCPU.Start();
 			string CPUproc = pCPU.StandardOutput.ReadToEnd();
